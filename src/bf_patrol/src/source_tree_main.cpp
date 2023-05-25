@@ -38,7 +38,7 @@ int main(int argc, char * argv[])
 
   factory.registerFromPlugin(loader.getOSName("delegate_action_node"));
 
-  std::string pkgpath = ament_index_cpp::get_package_share_directory("behaviorfleets");
+  std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
   std::string xml_file, xml_file_remote_1, remote_tree_1, remote_id_1;
 
