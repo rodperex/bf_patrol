@@ -1,3 +1,9 @@
+.vscode/
+build/
+install/
+log/
+src/thirdparty/
+
 # Prerequisites
 *.d
 
