@@ -38,7 +38,11 @@ def generate_launch_description():
         executable='remote_tree',
         name='remote_tree',
         output='screen',
-        parameters=[params])  
+        parameters=[params],
+        remappings=[
+            ('input_scan', '/scan_raw'),
+            ('output_vel', '/key_vel')
+        ])  
 
     # Create the launch description and populate
     ld = LaunchDescription()

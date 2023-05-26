@@ -48,7 +48,7 @@ int main(int argc, char * argv[])
     YAML::Node params = YAML::Load(fin);
 
     xml_file = pkgpath + params["tree"].as<std::string>();
-    xml_file_remote_1 = pkgpath + params["remote_tree_1"].as<std::string>();
+    // xml_file_remote_1 = pkgpath + params["remote_tree_1"].as<std::string>();
     // remote_id_1 = params["remote_id_1"].as<std::string>();
 
     // std::ifstream file(xml_file_remote_1);

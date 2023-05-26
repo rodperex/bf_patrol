@@ -24,14 +24,15 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::executors::MultiThreadedExecutor exec;
+  std::string mission_id = "bumpgo";
 
-  auto node_1 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_1", "patrol");
-  auto node_2 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_2", "patrol");
-  auto node_3 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_3", "patrol");
-  auto node_4 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_4", "patrol");
-  auto node_5 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_5", "patrol");
-  auto node_6 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_6", "patrol");
-  auto node_7 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_7", "patrol");
+  auto node_1 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_1", mission_id);
+  auto node_2 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_2", mission_id);
+  auto node_3 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_3", mission_id);
+  auto node_4 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_4", mission_id);
+  auto node_5 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_5", mission_id);
+  auto node_6 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_6", mission_id);
+  auto node_7 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_7", mission_id);
 
   exec.add_node(node_1);
   exec.add_node(node_2);

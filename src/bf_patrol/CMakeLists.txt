@@ -49,6 +49,11 @@ add_library(get_waypoint_bt_node SHARED src/bf_patrol/GetWaypoint.cpp)
 add_library(battery_checker_bt_node SHARED src/bf_patrol/BatteryChecker.cpp)
 add_library(track_objects_bt_node SHARED src/bf_patrol/TrackObjects.cpp)
 
+add_library(forward_bt_node SHARED src/bf_patrol/Forward.cpp)
+add_library(back_bt_node SHARED src/bf_patrol/Back.cpp)
+add_library(turn_bt_node SHARED src/bf_patrol/Turn.cpp)
+add_library(is_obstacle_bt_node SHARED src/bf_patrol/IsObstacle.cpp)
+
 list(APPEND plugin_libs
   recharge_bt_node
   patrol_bt_node
@@ -56,6 +61,11 @@ list(APPEND plugin_libs
   get_waypoint_bt_node
   battery_checker_bt_node
   track_objects_bt_node
+
+  forward_bt_node
+  back_bt_node
+  turn_bt_node
+  is_obstacle_bt_node
 )
 
 foreach(bt_plugin ${plugin_libs})
