@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::executors::MultiThreadedExecutor exec;
-  std::string mission_id = "bumpgo";
+  std::string mission_id = "patrol";
 
   auto node_1 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_1", mission_id);
   auto node_2 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_2", mission_id);

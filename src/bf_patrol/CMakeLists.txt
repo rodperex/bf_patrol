@@ -48,11 +48,12 @@ add_library(move_bt_node SHARED src/bf_patrol/Move.cpp)
 add_library(get_waypoint_bt_node SHARED src/bf_patrol/GetWaypoint.cpp)
 add_library(battery_checker_bt_node SHARED src/bf_patrol/BatteryChecker.cpp)
 add_library(track_objects_bt_node SHARED src/bf_patrol/TrackObjects.cpp)
-
 add_library(forward_bt_node SHARED src/bf_patrol/Forward.cpp)
 add_library(back_bt_node SHARED src/bf_patrol/Back.cpp)
 add_library(turn_bt_node SHARED src/bf_patrol/Turn.cpp)
 add_library(is_obstacle_bt_node SHARED src/bf_patrol/IsObstacle.cpp)
+
+
 
 list(APPEND plugin_libs
   recharge_bt_node
@@ -61,7 +62,6 @@ list(APPEND plugin_libs
   get_waypoint_bt_node
   battery_checker_bt_node
   track_objects_bt_node
-
   forward_bt_node
   back_bt_node
   turn_bt_node
@@ -82,7 +82,6 @@ ament_target_dependencies(remote_tree ${dependencies})
 # SOLVE THIS!
 target_link_libraries(remote_tree /home/rod/ros2_ws/bf_patrol/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 # target_link_libraries(remote_tree remote_delegate_action_node)
-
 
 install(TARGETS
   ${plugin_libs}

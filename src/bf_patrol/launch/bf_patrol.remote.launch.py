@@ -41,7 +41,7 @@ def generate_launch_description():
         parameters=[params],
         remappings=[
             ('input_scan', '/scan_raw'),
-            ('output_vel', '/key_vel')
+            ('output_vel', '/nav_vel')
         ])  
 
     # Create the launch description and populate
