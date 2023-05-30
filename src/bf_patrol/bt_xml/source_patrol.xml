@@ -7,7 +7,8 @@
         mission_id="patrol"
         plugins="recharge_bt_node, patrol_bt_node, move_bt_node, get_waypoint_bt_node, battery_checker_bt_node, track_objects_bt_node"
         remote_tree="patrol.xml"
-        timeout="3"/>
+        timeout="3"
+        max_tries="1"/>
     </BehaviorTree>
     <!-- ////////// -->
     <TreeNodesModel>
@@ -17,6 +18,7 @@
             <input_port name="remote_tree">Tree to delegate</input_port>
             <input_port name="remote_id">Robot to delegate BT</input_port>
             <input_port name="timeout">Delegation timeout</input_port>
+            <input_port name="max_tries">Number of timeout tries before FAILURE</input_port>
         </Action>
     </TreeNodesModel>
     <!-- ////////// -->

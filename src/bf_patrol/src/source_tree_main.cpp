@@ -69,7 +69,7 @@ int main(int argc, char * argv[])
 
   std::cout << "\t- Tree created from file" << std::endl;
 
-  rclcpp::Rate rate(10);
+  rclcpp::Rate rate(100);
 
   bool finish = false;
   while (!finish && rclcpp::ok()) {

@@ -58,25 +58,25 @@ IsObstacle::tick()
 
   double distance = 1.0;
   getInput("distance", distance);
-  
 
-  for(pos = 0; pos < last_scan_->ranges.size()/2; pos++){
-    if(last_scan_->ranges[pos] < distance){
+
+  for (pos = 0; pos < last_scan_->ranges.size() / 2; pos++) {
+    if (last_scan_->ranges[pos] < distance) {
       setOutput("direction", 2);
       return BT::NodeStatus::SUCCESS;
       break;
     }
   }
 
-  for(pos = (last_scan_->ranges.size()/2 + 1); pos < last_scan_->ranges.size(); pos++){
-    if(last_scan_->ranges[pos] < distance){
+  for (pos = (last_scan_->ranges.size() / 2 + 1); pos < last_scan_->ranges.size(); pos++) {
+    if (last_scan_->ranges[pos] < distance) {
       setOutput("direction", 1);
       return BT::NodeStatus::SUCCESS;
     }
   }
 
   return BT::NodeStatus::FAILURE;
-  
+
 }
 
 }  // namespace bf_patrol

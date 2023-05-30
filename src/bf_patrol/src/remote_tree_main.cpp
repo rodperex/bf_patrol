@@ -14,33 +14,51 @@
 
 #include <string>
 #include <memory>
+#include <fstream>
 
 #include "rclcpp/rclcpp.hpp"
 
 #include "behaviorfleets/RemoteDelegateActionNode.hpp"
 
+#include "ament_index_cpp/get_package_share_directory.hpp"
+
+#include "yaml-cpp/yaml.h"
 
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
   rclcpp::executors::MultiThreadedExecutor exec;
-  std::string mission_id = "patrol";
 
-  auto node_1 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_1", mission_id);
-  auto node_2 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_2", mission_id);
-  auto node_3 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_3", mission_id);
-  auto node_4 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_4", mission_id);
-  auto node_5 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_5", mission_id);
-  auto node_6 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_6", mission_id);
-  auto node_7 = std::make_shared<BF::RemoteDelegateActionNode>("patrol_7", mission_id);
+  std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
-  exec.add_node(node_1);
-  exec.add_node(node_2);
-  exec.add_node(node_3);
-  exec.add_node(node_4);
-  exec.add_node(node_5);
-  exec.add_node(node_6);
-  exec.add_node(node_7);
+  std::list<std::shared_ptr<BF::RemoteDelegateActionNode>> nodes;
+
+  try {
+    std::ifstream fin(pkgpath + "/params/test_config.yaml");
+    YAML::Node params = YAML::Load(fin);
+    int num_nodes = params["nodes"].as<int>();
+    std::string name_prefix = params["name_prefix"].as<std::string>();
+    std::vector<std::string> missions = params["missions"].as<std::vector<std::string>>();
+
+    int mission_index = 0;
+    for (int i = 0; i < num_nodes; ++i) {
+      auto node =
+        std::make_shared<BF::RemoteDelegateActionNode>(
+        name_prefix + "_" + std::to_string(
+          i + 1), missions[mission_index]);
+      nodes.push_back(node);
+      exec.add_node(node);
+
+      std::cout << "\n\n******** Created node " << name_prefix + "_" + std::to_string(i + 1) <<
+        " with mission " << missions[mission_index] << "\n\n" << std::endl;
+
+      mission_index = (mission_index + 1) % missions.size();
+    }
+
+  } catch (YAML::Exception & e) {
+    std::cerr << "Error loading YAML file: " << e.what() << std::endl;
+    return 1;
+  }
 
   exec.spin();
 
