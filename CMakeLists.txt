@@ -80,7 +80,7 @@ target_link_libraries(source_tree yaml-cpp)
 add_executable(remote_tree src/remote_tree_main.cpp)
 ament_target_dependencies(remote_tree ${dependencies})
 # SOLVE THIS!
-target_link_libraries(remote_tree yaml-cpp /home/rod/ros2_ws/bf_patrol/install/behaviorfleets/lib/libremote_delegate_action_node.so)
+target_link_libraries(remote_tree yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 # target_link_libraries(remote_tree yaml-cpp remote_delegate_action_node)
 
 
