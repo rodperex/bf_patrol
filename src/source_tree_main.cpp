@@ -46,16 +46,7 @@ int main(int argc, char * argv[])
     // Load the XML path from the YAML file
     std::ifstream fin(pkgpath + "/params/config.yaml");
     YAML::Node params = YAML::Load(fin);
-
     xml_file = pkgpath + params["tree"].as<std::string>();
-    // xml_file_remote_1 = pkgpath + params["remote_tree_1"].as<std::string>();
-    // remote_id_1 = params["remote_id_1"].as<std::string>();
-
-    // std::ifstream file(xml_file_remote_1);
-    // std::ostringstream contents_stream;
-
-    // contents_stream << file.rdbuf();
-    // remote_tree_1 = contents_stream.str();
   } catch (YAML::Exception & e) {
     std::cerr << "Error loading YAML file: " << e.what() << std::endl;
     return 1;
@@ -69,13 +60,13 @@ int main(int argc, char * argv[])
 
   std::cout << "\t- Tree created from file" << std::endl;
 
-  rclcpp::Rate rate(100);
+  // rclcpp::Rate rate(100);
 
   bool finish = false;
   while (!finish && rclcpp::ok()) {
     finish = tree.rootNode()->executeTick() != BT::NodeStatus::RUNNING;
     rclcpp::spin_some(node);
-    rate.sleep();
+    // rate.sleep();
   }
 
   std::cout << "Finished" << std::endl;
