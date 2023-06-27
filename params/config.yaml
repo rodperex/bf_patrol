@@ -1,1 +1,9 @@
-tree: /bt_xml/source_bumpgo.xml
+tree: /bt_xml/source_patrol.xml
+waypoints:
+  - name: wp1
+    x: 40.7128
+    y: -74.0060
+  - name: wp2
+    x: 34.0522
+    y: -118.2437
+

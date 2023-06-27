@@ -26,6 +26,10 @@
 
 #include "yaml-cpp/yaml.h"
 
+struct Waypoint {
+    double x;
+    double y;
+};
 
 int main(int argc, char * argv[])
 {
@@ -40,33 +44,48 @@ int main(int argc, char * argv[])
 
   std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
-  std::string xml_file, xml_file_remote_1, remote_tree_1, remote_id_1;
+  std::string xml_file;
+
+  std::vector<Waypoint> wps;
+
 
   try {
     // Load the XML path from the YAML file
     std::ifstream fin(pkgpath + "/params/config.yaml");
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["tree"].as<std::string>();
+    std::cout << "\t- XML file: " << xml_file << std::endl;
+    for (const auto& node : params["waypoints"]) {
+      Waypoint wp;
+      wp.x = node["x"].as<double>();
+      wp.y = node["y"].as<double>();
+      wps.push_back(wp);
+    }
   } catch (YAML::Exception & e) {
     std::cerr << "Error loading YAML file: " << e.what() << std::endl;
     return 1;
   }
 
+  for(auto wp : wps) {
+    std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
+  }
+
   auto blackboard = BT::Blackboard::create();
   blackboard->set("node", node);
   blackboard->set("pkgpath", pkgpath + "/bt_xml/");
+  blackboard->set("waypoints", wps);
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
 
   std::cout << "\t- Tree created from file" << std::endl;
 
-  // rclcpp::Rate rate(100);
+  rclcpp::Rate rate(100);
 
   bool finish = false;
   while (!finish && rclcpp::ok()) {
     finish = tree.rootNode()->executeTick() != BT::NodeStatus::RUNNING;
     rclcpp::spin_some(node);
-    // rate.sleep();
+    rate.sleep();
   }
 
   std::cout << "Finished" << std::endl;
