@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<root main_tree_to_execute="BehaviorTree" BTCPP_format="4">
+<root main_tree_to_execute="BehaviorTree">
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <KeepRunningUntilFailure>
@@ -14,10 +14,7 @@
                 </Fallback>
                 <Sequence>
                     <Action ID="GetWaypoint" waypoint="{wp}" wp_id="next"/>
-                        <Parallel success_threshold="1" failure_threshold="1">
-                          <Action ID="TrackObjects"/>
-                          <Action ID="Move" goal="{wp}"/>
-                        </Parallel>
+                    <Action ID="Move" goal="{wp}"/>
                     <Action ID="Patrol"/>
                 </Sequence>
             </ReactiveSequence>
@@ -39,4 +36,3 @@
     </TreeNodesModel>
     <!-- ////////// -->
 </root>
-
