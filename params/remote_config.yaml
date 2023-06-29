@@ -1,0 +1,9 @@
+remote:
+  ros__parameters:
+    plugins: 
+      - battery_checker_bt_node
+      - patrol_bt_node
+      - recharge_bt_node
+      - move_bt_node
+      - get_waypoint_bt_node
+      

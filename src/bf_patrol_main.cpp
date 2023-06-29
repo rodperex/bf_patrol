@@ -37,7 +37,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
 
-  auto node = rclcpp::Node::make_shared("source_tree");
+  auto node = rclcpp::Node::make_shared("source_patrol_tree");
 
   BT::SharedLibrary loader;
   BT::BehaviorTreeFactory factory;
@@ -53,9 +53,9 @@ int main(int argc, char * argv[])
 
   try {
     // Load the XML path from the YAML file
-    std::ifstream fin(pkgpath + "/params/config.yaml");
+    std::ifstream fin(pkgpath + "/params/patrol_config.yaml");
     YAML::Node params = YAML::Load(fin);
-    xml_file = pkgpath + params["tree"].as<std::string>();
+    xml_file = pkgpath + params["source_tree"].as<std::string>();
     std::cout << "\t- XML file: " << xml_file << std::endl;
     for (const auto& node : params["waypoints"]) {
       Waypoint wp;

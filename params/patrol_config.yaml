@@ -1,4 +1,7 @@
-tree: /bt_xml/source_patrol.xml
+source_tree: /bt_xml/source_patrol.xml
+nodes: 1
+missions:
+  - patrol
 waypoints:
   - name: wp1
     x: -1.7

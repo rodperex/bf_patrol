@@ -18,39 +18,46 @@
 
 #include "rclcpp/rclcpp.hpp"
 
-#include "behaviorfleets/RemoteDelegateActionNode.hpp"
-
 #include "ament_index_cpp/get_package_share_directory.hpp"
 
 #include "yaml-cpp/yaml.h"
 
+#include "behaviorfleets/RemoteDelegateActionNode.hpp"
+
+
 int main(int argc, char * argv[])
 {
+  std::string params_file = "patrol_config.yaml";
+
+  if (argc > 1) {
+    params_file = std::string(argv[1]);
+  }
+
   rclcpp::init(argc, argv);
-  rclcpp::executors::MultiThreadedExecutor exec;
+  rclcpp::executors::SingleThreadedExecutor exec;
 
   std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
   std::list<std::shared_ptr<BF::RemoteDelegateActionNode>> nodes;
 
   try {
-    std::ifstream fin(pkgpath + "/params/test_config.yaml");
+    std::cout << "Configuration file: " << params_file << std::endl;
+    std::ifstream fin(pkgpath + "/params/" + params_file);
     YAML::Node params = YAML::Load(fin);
     int num_nodes = params["nodes"].as<int>();
-    std::string name_prefix = params["name_prefix"].as<std::string>();
     std::vector<std::string> missions = params["missions"].as<std::vector<std::string>>();
 
     int mission_index = 0;
     for (int i = 0; i < num_nodes; ++i) {
-      auto node =
-        std::make_shared<BF::RemoteDelegateActionNode>(
-        name_prefix + "_" + std::to_string(
-          i + 1), missions[mission_index]);
+      std::string name = "patrol_" + std::to_string(i + 1);
+      std::string type = missions[mission_index];
+
+      auto node = std::make_shared<BF::RemoteDelegateActionNode>(name, type);
       nodes.push_back(node);
       exec.add_node(node);
 
-      std::cout << "\n\n******** Created node " << name_prefix + "_" + std::to_string(i + 1) <<
-        " with mission " << missions[mission_index] << "\n\n" << std::endl;
+      std::cout << "\n\n******** Created node " << name << " with mission " << type << "\n\n" <<
+        std::endl;
 
       mission_index = (mission_index + 1) % missions.size();
     }

@@ -35,14 +35,15 @@ def generate_launch_description():
   
     remote_cmd = Node(
         package='bf_patrol',
-        executable='remote_tree',
-        name='remote_tree',
+        executable='remote',
+        # name='remote',
         output='screen',
         parameters=[params],
+        arguments=['patrol_config.yaml'],
         remappings=[
             ('input_scan', '/scan_raw'),
-            ('output_vel', '/nav_vel')
-        ])  
+            ('output_vel', '/nav_vel')]
+        )  
 
     # Create the launch description and populate
     ld = LaunchDescription()

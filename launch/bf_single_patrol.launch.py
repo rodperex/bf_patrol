@@ -1,4 +1,4 @@
-# Copyright 2023 Intelligent Robotics Lab
+# Copyright 2023 Rodrigo Pérez-Rodríguez
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,27 +20,34 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+import yaml
 
 
 def generate_launch_description():
+    # Get the launch directory
+    sp_dir = get_package_share_directory('bf_patrol')
 
-
-    patrolling_cmd = Node(
-        package='bf_patrol',
-        executable='bt_patrol',
-        parameters=[{
-          'use_sim_time': True
-        }],
-        remappings=[
-          ('input_scan', '/scan'),
-          ('output_vel', '/cmd_vel')
-        ],
-        output='screen'
+    params = os.path.join(
+        get_package_share_directory('bf_patrol'),
+        'params',
+        'remote_config.yaml'
     )
+  
+    remote_cmd = Node(
+        package='bf_patrol',
+        executable='single_remote',
+        # name='remote',
+        output='screen',
+        parameters=[params],
+        arguments=['patrol_config.yaml'],
+        remappings=[
+            ('input_scan', '/scan'),
+            ('output_vel', '/cmd_vel')]
+        )  
 
+    # Create the launch description and populate
     ld = LaunchDescription()
 
-    # Add any actions
-    ld.add_action(patrolling_cmd)
-
+    ld.add_action(remote_cmd)
+    
     return ld

@@ -57,7 +57,7 @@ Patrol::tick()
 
   auto elapsed = node_->now() - start_time_;
 
-  if (elapsed < 15s) {
+  if (elapsed < 5s) {
     return BT::NodeStatus::RUNNING;
   } else {
     return BT::NodeStatus::SUCCESS;

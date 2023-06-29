@@ -80,18 +80,24 @@ add_executable(bf_patrol src/bf_patrol_main.cpp)
 ament_target_dependencies(bf_patrol ${dependencies})
 target_link_libraries(bf_patrol yaml-cpp)
 
-add_executable(remote_tree src/remote_tree_main.cpp)
-ament_target_dependencies(remote_tree ${dependencies})
+add_executable(remote src/remote_main.cpp)
+ament_target_dependencies(remote ${dependencies})
 # SOLVE THIS!
-target_link_libraries(remote_tree yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
+target_link_libraries(remote yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 # target_link_libraries(remote_tree yaml-cpp remote_delegate_action_node)
+
+
+add_executable(single_remote src/single_remote_main.cpp)
+ament_target_dependencies(single_remote ${dependencies})
+target_link_libraries(single_remote /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 
 
 install(TARGETS
   ${plugin_libs}
   bt_patrol
   bf_patrol
-  remote_tree
+  remote
+  single_remote
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

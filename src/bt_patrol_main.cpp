@@ -24,8 +24,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 
-
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
   rclcpp::init(argc, argv);
 
@@ -56,7 +55,8 @@ int main(int argc, char * argv[])
   rclcpp::Rate rate(10);
 
   bool finish = false;
-  while (!finish && rclcpp::ok()) {
+  while (!finish && rclcpp::ok())
+  {
     std::cout << "Tick" << std::endl;
     finish = tree.rootNode()->executeTick() == BT::NodeStatus::SUCCESS;
     rclcpp::spin_some(node);

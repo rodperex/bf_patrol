@@ -43,6 +43,7 @@ Move::on_tick()
   getInput("goal", goal);
 
   goal_.pose = goal;
+
 }
 
 BT::NodeStatus
