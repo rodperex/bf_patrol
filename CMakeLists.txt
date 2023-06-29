@@ -73,12 +73,12 @@ foreach(bt_plugin ${plugin_libs})
   target_compile_definitions(${bt_plugin} PRIVATE BT_PLUGIN_EXPORT)
 endforeach()
 
-add_executable(patrolling_main src/patrolling_main.cpp)
-ament_target_dependencies(patrolling_main ${dependencies})
+add_executable(bt_patrol src/bt_patrol_main.cpp)
+ament_target_dependencies(bt_patrol ${dependencies})
 
-add_executable(source_patrol_tree src/patrol_bt_main.cpp)
-ament_target_dependencies(source_patrol_tree ${dependencies})
-target_link_libraries(source_patrol_tree yaml-cpp)
+add_executable(bf_patrol src/bf_patrol_main.cpp)
+ament_target_dependencies(bf_patrol ${dependencies})
+target_link_libraries(bf_patrol yaml-cpp)
 
 add_executable(remote_tree src/remote_tree_main.cpp)
 ament_target_dependencies(remote_tree ${dependencies})
@@ -89,8 +89,8 @@ target_link_libraries(remote_tree yaml-cpp /home/rod/ros2_ws/bf_ws/install/behav
 
 install(TARGETS
   ${plugin_libs}
-  patrolling_main
-  source_patrol_tree
+  bt_patrol
+  bf_patrol
   remote_tree
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib

@@ -27,8 +27,10 @@
 #include "yaml-cpp/yaml.h"
 
 struct Waypoint {
-    double x;
-    double y;
+  std::string id;
+  double x;
+  double y;
+  bool visited;
 };
 
 int main(int argc, char * argv[])
@@ -59,6 +61,7 @@ int main(int argc, char * argv[])
       Waypoint wp;
       wp.x = node["x"].as<double>();
       wp.y = node["y"].as<double>();
+      wp.visited = false;
       wps.push_back(wp);
     }
   } catch (YAML::Exception & e) {

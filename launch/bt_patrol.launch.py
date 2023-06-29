@@ -27,7 +27,7 @@ def generate_launch_description():
 
     patrolling_cmd = Node(
         package='bf_patrol',
-        executable='patrolling_main',
+        executable='bt_patrol_main',
         parameters=[{
           'use_sim_time': True
         }],
