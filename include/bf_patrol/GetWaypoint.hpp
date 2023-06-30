@@ -12,11 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef BR2_BF_PATROL__GETWAYPOINT_HPP_
-#define BR2_BF_PATROL__GETWAYPOINT_HPP_
+#ifndef BF_PATROL__GETWAYPOINT_HPP_
+#define BF_PATROL__GETWAYPOINT_HPP_
 
 #include <string>
 #include <vector>
+
+#include "datatypes.hpp"
 
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"
@@ -45,20 +47,13 @@ public:
       });
   }
 
-  struct Waypoint {
-    std::string id;
-    double x;
-    double y;
-    bool visited;
-  };
-
 private:
   std::vector<Waypoint> wps_;
-  geometry_msgs::msg::PoseStamped recharge_point_;
+  // geometry_msgs::msg::PoseStamped recharge_point_;
   std::vector<geometry_msgs::msg::PoseStamped> waypoints_;
   static int current_;
 };
 
 }  // namespace bf_patrol
 
-#endif  // BR2_BF_PATROL__GETWAYPOINT_HPP_
+#endif  // BF_PATROL__GETWAYPOINT_HPP_

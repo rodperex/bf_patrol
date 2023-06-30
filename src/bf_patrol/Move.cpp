@@ -39,10 +39,21 @@ Move::Move(
 void
 Move::on_tick()
 {
-  geometry_msgs::msg::PoseStamped goal;
-  getInput("goal", goal);
+  getInput("goal", current_goal_);
 
-  goal_.pose = goal;
+  config().blackboard->get("waypoints", wps_);
+
+  for(auto wp:wps_) {
+    if(wp.id == current_goal_) {
+      geometry_msgs::msg::PoseStamped goal;
+      goal.header.frame_id = "map";
+      goal.pose.orientation.w = 1.0;
+      goal.pose.position.x = wp.x;
+      goal.pose.position.y = wp.y;
+      goal_.pose = goal;
+      break;
+    }
+  }
 
 }
 
@@ -50,6 +61,13 @@ BT::NodeStatus
 Move::on_success()
 {
   RCLCPP_INFO(node_->get_logger(), "navigation Suceeded");
+
+  for(auto wp:wps_) {
+    if(wp.id == current_goal_) {
+      wp.visited = true;  
+    }
+  }
+  config().blackboard->set("waypoints", wps_);
 
   return BT::NodeStatus::SUCCESS;
 }

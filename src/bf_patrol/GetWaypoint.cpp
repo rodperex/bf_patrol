@@ -37,66 +37,6 @@ GetWaypoint::GetWaypoint(
   rclcpp::Node::SharedPtr node;
   config().blackboard->get("node", node);
   config().blackboard->get("waypoints", wps_);
-
-  for(auto wp:wps_) {
-    if(wp.id == "recharge") {
-      recharge_point_.header.frame_id = "map";
-      recharge_point_.pose.orientation.w = 1.0;
-      recharge_point_.pose.position.x = wp.x;
-      recharge_point_.pose.position.y = wp.y;
-    } else {
-      geometry_msgs::msg::PoseStamped wp_msg;
-      wp_msg.header.frame_id = "map";
-      wp_msg.pose.orientation.w = 1.0;
-      wp_msg.pose.position.x = wp.x;
-      wp_msg.pose.position.y = wp.y;
-      waypoints_.push_back(wp_msg);
-    }
-  }
-
-  // geometry_msgs::msg::PoseStamped wp;
-  // wp.header.frame_id = "map";
-  // wp.pose.orientation.w = 1.0;
-
-  // // recharge wp
-  // wp.pose.position.x = 3.67;
-  // wp.pose.position.y = -0.24;
-  // recharge_point_ = wp;
-
-  // // wp1
-  // wp.pose.position.x = 1.07;
-  // wp.pose.position.y = -12.38;
-  // waypoints_.push_back(wp);
-
-  // // wp2
-  // wp.pose.position.x = -5.32;
-  // wp.pose.position.y = -8.85;
-  // waypoints_.push_back(wp);
-
-  // // wp3
-  // wp.pose.position.x = -0.56;
-  // wp.pose.position.y = 0.24;
-  // waypoints_.push_back(wp);
-
-  // // recharge wp
-  // wp.pose.position.x = -1.7;
-  // wp.pose.position.y = -0.5;
-  // recharge_point_ = wp;
-
-  // // wp1
-  // wp.pose.position.x = 1.42;
-  // wp.pose.position.y = -1.14;
-  // waypoints_.push_back(wp);
-
-  // // wp2
-  // wp.pose.position.x = 1.58;
-  // wp.pose.position.y = 1.28;
-  // waypoints_.push_back(wp);
-
-  // // wp3
-  // wp.pose.position.x = -1.18;
-  // wp.pose.position.y = 1.61;
-  // waypoints_.push_back(wp);
 }
 
 void
@@ -107,17 +47,28 @@ GetWaypoint::halt()
 BT::NodeStatus
 GetWaypoint::tick()
 {
+  bool pending_wps = false;
   std::string id;
   getInput("wp_id", id);
 
-  if (id == "recharge") {
-    setOutput("waypoint", recharge_point_);
-  } else {
-    setOutput("waypoint", waypoints_[current_++]);
-    current_ = current_ % waypoints_.size();
+  config().blackboard->get("waypoints", wps_);
+
+  if (id != "recharge") {
+    for (auto wp:wps_) {
+      if (!wp.visited && wp.id != id) {
+        id = wp.id;
+        pending_wps = true;
+        break;
+      }
+    }
   }
 
-  return BT::NodeStatus::SUCCESS;
+  if (pending_wps) {
+    setOutput("waypoint", id);
+    return BT::NodeStatus::SUCCESS;
+  }
+  return BT::NodeStatus::FAILURE;
+  
 }
 
 }  // namespace bf_patrol

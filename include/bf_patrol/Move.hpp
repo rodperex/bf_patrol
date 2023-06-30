@@ -24,6 +24,9 @@
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"
 
+
+#include "datatypes.hpp"
+
 namespace bf_patrol
 {
 
@@ -41,10 +44,18 @@ public:
   static BT::PortsList providedPorts()
   {
     return {
-      BT::InputPort<geometry_msgs::msg::PoseStamped>("goal")
+      BT::InputPort<Waypoint>("goal")
     };
   }
+
+private:
+
+  std::string current_goal_; 
+  std::vector<Waypoint> wps_;
+
 };
+
+
 
 }  // namespace bt_patrol
 

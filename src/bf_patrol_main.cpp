@@ -26,12 +26,7 @@
 
 #include "yaml-cpp/yaml.h"
 
-struct Waypoint {
-  std::string id;
-  double x;
-  double y;
-  bool visited;
-};
+#include "bf_patrol/datatypes.hpp"
 
 int main(int argc, char * argv[])
 {
