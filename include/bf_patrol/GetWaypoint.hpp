@@ -45,7 +45,15 @@ public:
       });
   }
 
+  struct Waypoint {
+    std::string id;
+    double x;
+    double y;
+    bool visited;
+  };
+
 private:
+  std::vector<Waypoint> wps_;
   geometry_msgs::msg::PoseStamped recharge_point_;
   std::vector<geometry_msgs::msg::PoseStamped> waypoints_;
   static int current_;

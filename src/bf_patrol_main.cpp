@@ -61,6 +61,7 @@ int main(int argc, char * argv[])
       Waypoint wp;
       wp.x = node["x"].as<double>();
       wp.y = node["y"].as<double>();
+      wp.id = node["id"].as<std::string>();
       wp.visited = false;
       wps.push_back(wp);
     }

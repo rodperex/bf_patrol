@@ -36,10 +36,27 @@ GetWaypoint::GetWaypoint(
 {
   rclcpp::Node::SharedPtr node;
   config().blackboard->get("node", node);
+  config().blackboard->get("waypoints", wps_);
 
-  geometry_msgs::msg::PoseStamped wp;
-  wp.header.frame_id = "map";
-  wp.pose.orientation.w = 1.0;
+  for(auto wp:wps_) {
+    if(wp.id == "recharge") {
+      recharge_point_.header.frame_id = "map";
+      recharge_point_.pose.orientation.w = 1.0;
+      recharge_point_.pose.position.x = wp.x;
+      recharge_point_.pose.position.y = wp.y;
+    } else {
+      geometry_msgs::msg::PoseStamped wp_msg;
+      wp_msg.header.frame_id = "map";
+      wp_msg.pose.orientation.w = 1.0;
+      wp_msg.pose.position.x = wp.x;
+      wp_msg.pose.position.y = wp.y;
+      waypoints_.push_back(wp_msg);
+    }
+  }
+
+  // geometry_msgs::msg::PoseStamped wp;
+  // wp.header.frame_id = "map";
+  // wp.pose.orientation.w = 1.0;
 
   // // recharge wp
   // wp.pose.position.x = 3.67;
@@ -61,25 +78,25 @@ GetWaypoint::GetWaypoint(
   // wp.pose.position.y = 0.24;
   // waypoints_.push_back(wp);
 
-  // recharge wp
-  wp.pose.position.x = -1.7;
-  wp.pose.position.y = -0.5;
-  recharge_point_ = wp;
+  // // recharge wp
+  // wp.pose.position.x = -1.7;
+  // wp.pose.position.y = -0.5;
+  // recharge_point_ = wp;
 
-  // wp1
-  wp.pose.position.x = 1.42;
-  wp.pose.position.y = -1.14;
-  waypoints_.push_back(wp);
+  // // wp1
+  // wp.pose.position.x = 1.42;
+  // wp.pose.position.y = -1.14;
+  // waypoints_.push_back(wp);
 
-  // wp2
-  wp.pose.position.x = 1.58;
-  wp.pose.position.y = 1.28;
-  waypoints_.push_back(wp);
+  // // wp2
+  // wp.pose.position.x = 1.58;
+  // wp.pose.position.y = 1.28;
+  // waypoints_.push_back(wp);
 
-  // wp3
-  wp.pose.position.x = -1.18;
-  wp.pose.position.y = 1.61;
-  waypoints_.push_back(wp);
+  // // wp3
+  // wp.pose.position.x = -1.18;
+  // wp.pose.position.y = 1.61;
+  // waypoints_.push_back(wp);
 }
 
 void
