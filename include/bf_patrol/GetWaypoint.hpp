@@ -43,7 +43,7 @@ public:
     return BT::PortsList(
       {
         BT::InputPort<std::string>("wp_id"),
-        BT::OutputPort<geometry_msgs::msg::PoseStamped>("waypoint")
+        BT::OutputPort<std::string>("waypoint")
       });
   }
 

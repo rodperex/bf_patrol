@@ -47,7 +47,7 @@ GetWaypoint::halt()
 BT::NodeStatus
 GetWaypoint::tick()
 {
-  bool pending_wps = false;
+  bool pending_wps = true;
   std::string id;
   getInput("wp_id", id);
 
@@ -55,12 +55,12 @@ GetWaypoint::tick()
 
   if (id != "recharge") {
     for (auto wp:wps_) {
-      if (!wp.visited && wp.id != id) {
+      if (!wp.visited && (wp.id != "recharge")) {
         id = wp.id;
-        pending_wps = true;
         break;
       }
     }
+    pending_wps = false;
   }
 
   if (pending_wps) {
@@ -68,7 +68,6 @@ GetWaypoint::tick()
     return BT::NodeStatus::SUCCESS;
   }
   return BT::NodeStatus::FAILURE;
-  
 }
 
 }  // namespace bf_patrol
