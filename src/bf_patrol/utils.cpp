@@ -30,8 +30,9 @@ std::string serialize_wps(std::vector<Waypoint> wps)
 {
   std::string s_wps = "";
 
-  for(auto wp : wps) {
-    s_wps += wp.id + "," + std::to_string(wp.visited) + "," + std::to_string(wp.x) + "," + std::to_string(wp.y) + ";";
+  for (auto wp : wps) {
+    s_wps += wp.id + "," + std::to_string(wp.visited) + "," + std::to_string(wp.x) + "," +
+      std::to_string(wp.y) + ";";
   }
 
   return s_wps;

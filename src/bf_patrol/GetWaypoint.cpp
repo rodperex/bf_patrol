@@ -42,7 +42,7 @@ GetWaypoint::tick()
   config().blackboard->get("waypoints", s_wps_);
 
   wps_ = deserialize_wps(s_wps_);
-  
+
   std::vector<Waypoint>::iterator ptr;
   ptr = wps_.begin();
 

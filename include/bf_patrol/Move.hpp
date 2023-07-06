@@ -51,12 +51,10 @@ public:
   }
 
 private:
-
-  std::string current_goal_; 
+  std::string current_goal_;
   std::vector<Waypoint> wps_;
   std::string s_wps_;
 };
-
 
 
 }  // namespace bt_patrol

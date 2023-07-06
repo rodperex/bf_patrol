@@ -52,7 +52,7 @@ int main(int argc, char * argv[])
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
     std::cout << "\t- XML file: " << xml_file << std::endl;
-    for (const auto& node : params["waypoints"]) {
+    for (const auto & node : params["waypoints"]) {
       Waypoint wp;
       wp.x = node["x"].as<double>();
       wp.y = node["y"].as<double>();
@@ -66,7 +66,7 @@ int main(int argc, char * argv[])
   }
 
   std::string s_wps = serialize_wps(wps);
-  for(auto wp : wps) {
+  for (auto wp : wps) {
     std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
   }
 
@@ -98,7 +98,7 @@ int main(int argc, char * argv[])
     std::cout << "Finished: FAILURE" << std::endl;
   }
 
-  
+
   rclcpp::shutdown();
   return 0;
 }

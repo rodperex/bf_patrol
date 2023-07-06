@@ -34,8 +34,8 @@ Move::on_tick()
   config().blackboard->get("waypoints", s_wps_);
   wps_ = deserialize_wps(s_wps_);
 
-  for(auto wp:wps_) {
-    if(wp.id == current_goal_) {
+  for (auto wp:wps_) {
+    if (wp.id == current_goal_) {
       geometry_msgs::msg::PoseStamped goal;
       goal.header.frame_id = "map";
       goal.pose.orientation.w = 1.0;
@@ -57,8 +57,8 @@ Move::on_success()
   for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
     if (ptr->id == current_goal_) {
       RCLCPP_INFO(node_->get_logger(), "waipoint %s tagged as visited", ptr->id.c_str());
-        ptr->visited = true;
-        break;
+      ptr->visited = true;
+      break;
     }
   }
 
