@@ -16,6 +16,7 @@
 #define BF_PATROL__ISOBSTACLE_HPP_
 
 #include <string>
+#include <utility>
 
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"

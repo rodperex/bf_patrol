@@ -12,13 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <string>
-#include <iostream>
-#include <set>
-
 #include "bf_patrol/Recharge.hpp"
-
-#include "behaviortree_cpp/behavior_tree.h"
 
 namespace bf_patrol
 {

@@ -28,19 +28,6 @@
 #include "behaviorfleets/BlackboardManager.hpp"
 #include "bf_patrol/utils.hpp"
 
-std::string serialize_wps(std::vector<Waypoint> wps)
-{
-  std::string wps_str = "";
-
-  for(auto wp : wps) {
-    std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
-    wps_str += wp.id + "," + std::to_string(wp.visited) + "," + std::to_string(wp.x) + "," + std::to_string(wp.y) + ";";
-  }
-
-  std::cout << wps_str << std::endl;
-  return wps_str;
-}
-
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
@@ -79,6 +66,9 @@ int main(int argc, char * argv[])
   }
 
   std::string s_wps = serialize_wps(wps);
+  for(auto wp : wps) {
+    std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
+  }
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("node", node);
@@ -91,17 +81,24 @@ int main(int argc, char * argv[])
 
   std::cout << "\t- Tree created from file" << std::endl;
 
-  rclcpp::Rate rate(100);
-
+  // rclcpp::Rate rate(100);
+  BT::NodeStatus status;
   bool finish = false;
   while (!finish && rclcpp::ok()) {
-    finish = tree.rootNode()->executeTick() != BT::NodeStatus::RUNNING;
+    status = tree.rootNode()->executeTick();
+    finish = status != BT::NodeStatus::RUNNING;
     rclcpp::spin_some(node);
     rclcpp::spin_some(bb_manager);
-    rate.sleep();
+    // rate.sleep();
   }
 
-  std::cout << "Finished" << std::endl;
+  if (status == BT::NodeStatus::SUCCESS) {
+    std::cout << "Finished: SUCCESS" << std::endl;
+  } else {
+    std::cout << "Finished: FAILURE" << std::endl;
+  }
+
+  
   rclcpp::shutdown();
   return 0;
 }

@@ -12,17 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <string>
-#include <iostream>
-#include <algorithm>
-
 #include "bf_patrol/BatteryChecker.hpp"
-
-#include "behaviortree_cpp/behavior_tree.h"
-
-#include "geometry_msgs/msg/twist.hpp"
-
-#include "rclcpp/rclcpp.hpp"
 
 namespace bf_patrol
 {

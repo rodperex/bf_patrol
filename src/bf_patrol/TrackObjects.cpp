@@ -12,17 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <string>
-#include <iostream>
-#include <vector>
-#include <memory>
 
 #include "bf_patrol/TrackObjects.hpp"
-
-#include "geometry_msgs/msg/pose_stamped.hpp"
-#include "nav2_msgs/action/navigate_to_pose.hpp"
-
-#include "behaviortree_cpp/behavior_tree.h"
 
 namespace bf_patrol
 {

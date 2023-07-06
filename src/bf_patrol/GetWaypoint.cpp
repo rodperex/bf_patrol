@@ -15,12 +15,6 @@
 
 #include "bf_patrol/GetWaypoint.hpp"
 
-#include "behaviortree_cpp/behavior_tree.h"
-
-#include "geometry_msgs/msg/pose_stamped.hpp"
-
-#include "rclcpp/rclcpp.hpp"
-
 namespace bf_patrol
 {
 

@@ -16,6 +16,9 @@
 #define BF_PATROL__TRACKOBJECTS_HPP_
 
 #include <string>
+#include <iostream>
+#include <vector>
+#include <memory>
 
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "nav2_msgs/action/navigate_to_pose.hpp"

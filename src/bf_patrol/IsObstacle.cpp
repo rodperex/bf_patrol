@@ -12,15 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <string>
-#include <utility>
-
 #include "bf_patrol/IsObstacle.hpp"
-
-#include "behaviortree_cpp/behavior_tree.h"
-
-#include "sensor_msgs/msg/laser_scan.hpp"
-#include "rclcpp/rclcpp.hpp"
 
 namespace bf_patrol
 {

@@ -84,7 +84,7 @@ ament_target_dependencies(bt_patrol ${dependencies})
 
 add_executable(bf_patrol src/bf_patrol_main.cpp)
 ament_target_dependencies(bf_patrol ${dependencies})
-target_link_libraries(bf_patrol yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+target_link_libraries(bf_patrol utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
 
 add_executable(remote src/remote_main.cpp)
 ament_target_dependencies(remote ${dependencies})

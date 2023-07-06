@@ -16,6 +16,8 @@
 #define BF_PATROL__BATTERYCHECKER_HPP_
 
 #include <string>
+#include <iostream>
+#include <algorithm>
 #include <vector>
 
 #include "behaviortree_cpp/behavior_tree.h"

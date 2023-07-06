@@ -16,6 +16,8 @@
 #define BF_PATROL__RECHARGE_HPP_
 
 #include <string>
+#include <iostream>
+#include <set>
 
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"
