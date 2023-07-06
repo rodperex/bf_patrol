@@ -17,8 +17,10 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
+#include <iostream>
 
-#include "datatypes.hpp"
+#include "utils.hpp"
 
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"
@@ -48,6 +50,10 @@ public:
   }
 
 private:
+  // void serialize_wps();
+  // void deserialize_wps();
+
+  std::string s_wps_;
   std::vector<Waypoint> wps_;
   // geometry_msgs::msg::PoseStamped recharge_point_;
   std::vector<geometry_msgs::msg::PoseStamped> waypoints_;

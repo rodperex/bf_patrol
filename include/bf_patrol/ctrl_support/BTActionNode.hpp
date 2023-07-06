@@ -198,8 +198,8 @@ namespace bf_patrol
               "Failed to cancel action server for %s", action_name_.c_str());
         }
       }
-
-      setStatus(BT::NodeStatus::IDLE);
+      // MY CHANGE
+      // setStatus(BT::NodeStatus::IDLE);
     }
 
   protected:

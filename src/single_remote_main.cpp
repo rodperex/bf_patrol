@@ -27,8 +27,13 @@ int main(int argc, char * argv[])
   rclcpp::init(argc, argv);
 
   std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
+  std::string name = "patrol_1";
+  std::string type = "patrol";
 
-  auto node = std::make_shared<BF::RemoteDelegateActionNode>("patrol_1", "patrol");
+  auto node = std::make_shared<BF::RemoteDelegateActionNode>(name, type);
+;
+  std::cout << "\n\n******** Created node " << name << " with mission " << type << "\n\n" <<
+        std::endl;
 
   while(rclcpp::ok()) {
     rclcpp::spin_some(node);

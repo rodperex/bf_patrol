@@ -42,6 +42,8 @@ include_directories(
   # ${CMAKE_CURRENT_SOURCE_DIR}/../../install/behaviorfleets/include
 )
 
+add_library(utils SHARED src/bf_patrol/utils.cpp)
+
 add_library(recharge_bt_node SHARED src/bf_patrol/Recharge.cpp)
 add_library(patrol_bt_node SHARED src/bf_patrol/Patrol.cpp)
 add_library(move_bt_node SHARED src/bf_patrol/Move.cpp)
@@ -52,6 +54,10 @@ add_library(forward_bt_node SHARED src/bf_patrol/Forward.cpp)
 add_library(back_bt_node SHARED src/bf_patrol/Back.cpp)
 add_library(turn_bt_node SHARED src/bf_patrol/Turn.cpp)
 add_library(is_obstacle_bt_node SHARED src/bf_patrol/IsObstacle.cpp)
+
+target_link_libraries(get_waypoint_bt_node utils)
+target_link_libraries(move_bt_node utils)
+
 
 
 
@@ -78,7 +84,7 @@ ament_target_dependencies(bt_patrol ${dependencies})
 
 add_executable(bf_patrol src/bf_patrol_main.cpp)
 ament_target_dependencies(bf_patrol ${dependencies})
-target_link_libraries(bf_patrol yaml-cpp)
+target_link_libraries(bf_patrol yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
 
 add_executable(remote src/remote_main.cpp)
 ament_target_dependencies(remote ${dependencies})

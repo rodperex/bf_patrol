@@ -41,7 +41,8 @@ Move::on_tick()
 {
   getInput("goal", current_goal_);
 
-  config().blackboard->get("waypoints", wps_);
+  config().blackboard->get("waypoints", s_wps_);
+  wps_ = deserialize_wps(s_wps_);
 
   for(auto wp:wps_) {
     if(wp.id == current_goal_) {
@@ -60,14 +61,20 @@ Move::on_tick()
 BT::NodeStatus
 Move::on_success()
 {
-  RCLCPP_INFO(node_->get_logger(), "navigation Suceeded");
+  RCLCPP_INFO(node_->get_logger(), "navigation suceeded");
 
-  for(auto wp:wps_) {
-    if(wp.id == current_goal_) {
-      wp.visited = true;  
+  std::vector<Waypoint>::iterator ptr;
+  for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
+    if (ptr->id == current_goal_) {
+      RCLCPP_INFO(node_->get_logger(), "waipoint %s tagged as visited", ptr->id.c_str());
+        ptr->visited = true;
+        break;
     }
   }
-  config().blackboard->set("waypoints", wps_);
+
+  s_wps_ = serialize_wps(wps_);
+
+  config().blackboard->set("waypoints", s_wps_);
 
   return BT::NodeStatus::SUCCESS;
 }

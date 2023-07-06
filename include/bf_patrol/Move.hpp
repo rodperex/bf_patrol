@@ -24,8 +24,7 @@
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"
 
-
-#include "datatypes.hpp"
+#include "utils.hpp"
 
 namespace bf_patrol
 {
@@ -52,7 +51,7 @@ private:
 
   std::string current_goal_; 
   std::vector<Waypoint> wps_;
-
+  std::string s_wps_;
 };
 
 

@@ -44,7 +44,7 @@ Recharge::tick()
     return BT::NodeStatus::RUNNING;
   } else {
     counter_ = 0;
-    config().blackboard->set<float>("battery_level", 100.0f);
+    config().blackboard->set<float>("efbb_battery_level", 100.0f);
     return BT::NodeStatus::SUCCESS;
   }
 }

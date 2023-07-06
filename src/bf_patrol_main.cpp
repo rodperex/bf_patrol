@@ -25,8 +25,21 @@
 #include "rclcpp/rclcpp.hpp"
 
 #include "yaml-cpp/yaml.h"
+#include "behaviorfleets/BlackboardManager.hpp"
+#include "bf_patrol/utils.hpp"
 
-#include "bf_patrol/datatypes.hpp"
+std::string serialize_wps(std::vector<Waypoint> wps)
+{
+  std::string wps_str = "";
+
+  for(auto wp : wps) {
+    std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
+    wps_str += wp.id + "," + std::to_string(wp.visited) + "," + std::to_string(wp.x) + "," + std::to_string(wp.y) + ";";
+  }
+
+  std::cout << wps_str << std::endl;
+  return wps_str;
+}
 
 int main(int argc, char * argv[])
 {
@@ -65,14 +78,14 @@ int main(int argc, char * argv[])
     return 1;
   }
 
-  for(auto wp : wps) {
-    std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
-  }
+  std::string s_wps = serialize_wps(wps);
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("node", node);
   blackboard->set("pkgpath", pkgpath + "/bt_xml/");
-  blackboard->set("waypoints", wps);
+  blackboard->set("waypoints", s_wps);
+
+  auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
 
@@ -84,6 +97,7 @@ int main(int argc, char * argv[])
   while (!finish && rclcpp::ok()) {
     finish = tree.rootNode()->executeTick() != BT::NodeStatus::RUNNING;
     rclcpp::spin_some(node);
+    rclcpp::spin_some(bb_manager);
     rate.sleep();
   }
 

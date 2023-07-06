@@ -53,7 +53,7 @@ void
 BatteryChecker::update_battery()
 {
   float battery_level;
-  if (!config().blackboard->get("battery_level", battery_level)) {
+  if (!config().blackboard->get("efbb_battery_level", battery_level)) {
     battery_level = 100.0f;
   }
 
@@ -65,7 +65,7 @@ BatteryChecker::update_battery()
     last_twist_.angular.z * last_twist_.angular.z);
   battery_level = std::max(0.0f, battery_level - (vel * dt * DECAY_LEVEL) - EPSILON * dt);
 
-  config().blackboard->set("battery_level", battery_level);
+  config().blackboard->set("efbb_battery_level", battery_level);
 }
 
 BT::NodeStatus
@@ -74,11 +74,12 @@ BatteryChecker::tick()
   update_battery();
 
   float battery_level;
-  config().blackboard->get("battery_level", battery_level);
+  config().blackboard->get("efbb_battery_level", battery_level);
 
-  std::cout << battery_level << std::endl;
-
+  RCLCPP_INFO(rclcpp::get_logger("BatteryChecker"), "battery: %f%%", battery_level);
+  
   if (battery_level < MIN_LEVEL) {
+    RCLCPP_INFO(rclcpp::get_logger("BatteryChecker"), "Low battery: RECHARGE NEEDED");
     return BT::NodeStatus::FAILURE;
   } else {
     return BT::NodeStatus::SUCCESS;
