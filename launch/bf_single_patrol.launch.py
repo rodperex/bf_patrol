@@ -37,6 +37,7 @@ def generate_launch_description():
         package='bf_patrol',
         executable='single_remote',
         # name='remote',
+        # namespace='patrol_1',
         output='screen',
         parameters=[params],
         arguments=['patrol_config.yaml'],
