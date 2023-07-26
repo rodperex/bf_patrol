@@ -66,7 +66,7 @@ BatteryChecker::tick()
   float battery_level;
   config().blackboard->get("efbb_battery_level", battery_level);
 
-  RCLCPP_INFO(rclcpp::get_logger("BatteryChecker"), "battery: %f%%", battery_level);
+  // RCLCPP_INFO(rclcpp::get_logger("BatteryChecker"), "battery: %f%%", battery_level);
 
   if (battery_level < MIN_LEVEL) {
     RCLCPP_INFO(rclcpp::get_logger("BatteryChecker"), "Low battery: RECHARGE NEEDED");

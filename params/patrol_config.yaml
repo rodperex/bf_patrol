@@ -1,18 +1,30 @@
-source_tree: /bt_xml/source_3patrol.xml
+source_tree: /bt_xml/source_test.xml
 nodes: 5
 missions:
   - patrol
 waypoints:
   - id: wp1
-    x: 2.46
-    y: 1.55
+    x: 1.5
+    y: 4.0
   - id: wp2
-    x: 3.96
-    y: 0.12
+    x: 3.7
+    y: 1.0
   - id: wp3
-    x: -2.8
-    y: -1.67
+    x: 5.0
+    y: 0.15
+  - id: wp3
+    x: 5.0
+    y: 0.15
+  - id: wp4
+    x: 7.0
+    y: 1.5
+  - id: wp5
+    x: 5.0
+    y: 0.15
+  - id: wp6
+    x: 3.0
+    y: -3.5
   - id: recharge
-    x: -5.8
-    y: -3.3
+    x: -7.5
+    y: -3.0
     

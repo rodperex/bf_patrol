@@ -29,7 +29,8 @@ Move::Move(
 void
 Move::on_tick()
 {
-  getInput("goal", current_goal_);
+  // getInput("goal", current_goal_);
+  config().blackboard->get("efbb_goal", goal_);
 
   config().blackboard->get("waypoints", s_wps_);
   wps_ = deserialize_wps(s_wps_);
@@ -51,12 +52,12 @@ Move::on_tick()
 BT::NodeStatus
 Move::on_success()
 {
-  RCLCPP_INFO(node_->get_logger(), "navigation suceeded");
+  RCLCPP_INFO(node_->get_logger(), "** NAVIGATION SUCCEEDED");
 
   std::vector<Waypoint>::iterator ptr;
   for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
     if (ptr->id == current_goal_) {
-      RCLCPP_INFO(node_->get_logger(), "waipoint %s tagged as visited", ptr->id.c_str());
+      RCLCPP_INFO(node_->get_logger(), "waipoint %s tagged as VISITED", ptr->id.c_str());
       ptr->visited = true;
       break;
     }

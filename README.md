@@ -13,4 +13,6 @@ ros2 launch bf_patrol bf_3_patrol.launch.py
 ```
 
 # Problems 
-* Only one robot participates in the poll
+* Current goal is published in the bb, and all robots *see* that. Exclusion is not being done properly
+* We need to exclude from the bb: waypoint, used by GetWayPoint BT node. Instead of using ports, we can also do it using the bb.
+

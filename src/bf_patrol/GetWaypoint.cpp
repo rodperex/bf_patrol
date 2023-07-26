@@ -63,8 +63,9 @@ GetWaypoint::tick()
   RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "ID: %s", id.c_str());
 
   if (pending_wps) {
-    RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "WP %s set as goal in the bb", id.c_str());
-    setOutput("waypoint", id);
+      RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "WP %s set as goal in the bb", id.c_str());
+    // setOutput("waypoint", id);
+    config().blackboard->set("efbb_goal", id);
     return BT::NodeStatus::SUCCESS;
   }
   RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "No more WPs to visit");

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef BF_PATROL__CTRL_SUPPORT__BTLIFECYCLECTRLNODE_HPP_
+#ifndef BF_PATROL__CTRL_SUPPORT_<_BTLIFECYCLECTRLNODE_HPP_
 #define BF_PATROL__CTRL_SUPPORT__BTLIFECYCLECTRLNODE_HPP_
 
 #include <memory>
