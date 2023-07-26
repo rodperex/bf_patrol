@@ -40,7 +40,7 @@ def generate_launch_description():
         namespace='robot1',
         output='screen',
         parameters=[params],
-        arguments=['R1'],
+        arguments=['patrol_config.yaml'],
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]
@@ -52,7 +52,7 @@ def generate_launch_description():
         namespace='robot2',
         output='screen',
         parameters=[params],
-        arguments=['R2'],
+        arguments=['patrol_config.yaml'],
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]
@@ -64,7 +64,7 @@ def generate_launch_description():
         namespace='robot3',
         output='screen',
         parameters=[params],
-        arguments=['R3'],
+        arguments=['patrol_config.yaml'],
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]

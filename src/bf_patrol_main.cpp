@@ -81,15 +81,16 @@ int main(int argc, char * argv[])
 
   std::cout << "\t- Tree created from file" << std::endl;
 
-  // rclcpp::Rate rate(100);
+  rclcpp::Rate rate(100);
   BT::NodeStatus status;
   bool finish = false;
   while (!finish && rclcpp::ok()) {
     status = tree.rootNode()->executeTick();
     finish = status != BT::NodeStatus::RUNNING;
+    finish = false;
     rclcpp::spin_some(node);
     rclcpp::spin_some(bb_manager);
-    // rate.sleep();
+    rate.sleep();
   }
 
   if (status == BT::NodeStatus::SUCCESS) {
