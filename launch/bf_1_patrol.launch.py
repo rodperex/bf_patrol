@@ -37,10 +37,10 @@ def generate_launch_description():
         package='bf_patrol',
         executable='single_remote',
         # name='remote',
-        namespace='robot2',
+        namespace='robot1',
         output='screen',
         parameters=[params],
-        arguments=['R2'],
+        arguments=['R1'],
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]

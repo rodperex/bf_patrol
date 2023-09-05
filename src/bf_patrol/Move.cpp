@@ -30,7 +30,8 @@ void
 Move::on_tick()
 {
   // getInput("goal", current_goal_);
-  config().blackboard->get("efbb_goal", goal_);
+  config().blackboard->get("efbb_goal", current_goal_);
+  RCLCPP_INFO(rclcpp::get_logger("Move"), "Goal obtained from the bb: %s", current_goal_.c_str());
 
   config().blackboard->get("waypoints", s_wps_);
   wps_ = deserialize_wps(s_wps_);

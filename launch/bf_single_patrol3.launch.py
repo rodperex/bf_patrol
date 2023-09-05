@@ -40,7 +40,7 @@ def generate_launch_description():
         namespace='robot3',
         output='screen',
         parameters=[params],
-        arguments=['patrol_config.yaml'],
+        arguments=['R3'],
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]

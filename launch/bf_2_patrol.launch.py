@@ -33,10 +33,22 @@ def generate_launch_description():
         'remote_config.yaml'
     )
   
-    remote_cmd = Node(
+    remote_cmd_1 = Node(
         package='bf_patrol',
         executable='single_remote',
-        # name='remote',
+        # name='R1',
+        namespace='robot1',
+        output='screen',
+        parameters=[params],
+        arguments=['R1'],
+        remappings=[
+            ('input_scan', '/scan'),
+            ('output_vel', '/cmd_vel')]
+        )
+    remote_cmd_2 = Node(
+        package='bf_patrol',
+        executable='single_remote',
+        # name='R2',
         namespace='robot2',
         output='screen',
         parameters=[params],
@@ -44,11 +56,12 @@ def generate_launch_description():
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]
-        )  
+        )
 
     # Create the launch description and populate
     ld = LaunchDescription()
 
-    ld.add_action(remote_cmd)
+    ld.add_action(remote_cmd_1)
+    ld.add_action(remote_cmd_2)
     
     return ld

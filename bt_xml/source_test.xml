@@ -22,12 +22,6 @@
                           remote_id=""
                           remote_tree="remote_dummy.xml"
                           timeout=""/>
-      <DelegateActionNode max_tries="10"
-                          mission_id="patrol"
-                          plugins=""
-                          remote_id=""
-                          remote_tree="remote_dummy.xml"
-                          timeout=""/>
     </Parallel>
   </BehaviorTree>
 

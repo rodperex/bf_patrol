@@ -36,7 +36,7 @@ def generate_launch_description():
     remote_cmd_1 = Node(
         package='bf_patrol',
         executable='single_remote',
-        name='R1',
+        # name='R1',
         namespace='robot1',
         output='screen',
         parameters=[params],
@@ -48,7 +48,7 @@ def generate_launch_description():
     remote_cmd_2 = Node(
         package='bf_patrol',
         executable='single_remote',
-        name='R2',
+        # name='R2',
         namespace='robot2',
         output='screen',
         parameters=[params],
@@ -60,7 +60,7 @@ def generate_launch_description():
     remote_cmd_3 = Node(
         package='bf_patrol',
         executable='single_remote',
-        name='R3',
+        # name='R3',
         namespace='robot3',
         output='screen',
         parameters=[params],

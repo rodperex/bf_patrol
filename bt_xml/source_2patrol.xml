@@ -16,12 +16,6 @@
                           remote_id=""
                           remote_tree="patrol.xml"
                           timeout=""/>
-      <DelegateActionNode max_tries="1"
-                          mission_id="patrol"
-                          plugins="recharge_bt_node, patrol_bt_node, move_bt_node, get_waypoint_bt_node, battery_checker_bt_node, track_objects_bt_node"
-                          remote_id=""
-                          remote_tree="patrol.xml"
-                          timeout=""/>
     </Parallel>
   </BehaviorTree>
 

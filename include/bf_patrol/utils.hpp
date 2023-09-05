@@ -12,6 +12,7 @@ struct Waypoint
   double x;
   double y;
   bool visited;
+  bool in_process;
 };
 
 std::vector<Waypoint> deserialize_wps(std::string s_wps);
