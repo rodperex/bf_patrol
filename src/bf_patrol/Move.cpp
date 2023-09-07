@@ -31,7 +31,7 @@ Move::on_tick()
 {
   // getInput("goal", current_goal_);
   config().blackboard->get("efbb_goal", current_goal_);
-  RCLCPP_INFO(rclcpp::get_logger("Move"), "Goal obtained from the bb: %s", current_goal_.c_str());
+  RCLCPP_DEBUG(rclcpp::get_logger("Move"), "Goal obtained from the bb: %s", current_goal_.c_str());
 
   config().blackboard->get("waypoints", s_wps_);
   wps_ = deserialize_wps(s_wps_);
@@ -55,10 +55,14 @@ Move::on_success()
 {
   RCLCPP_INFO(node_->get_logger(), "** NAVIGATION SUCCEEDED");
 
+  // we need to load again the waypoints in case the entry has been changed by another robot
+  config().blackboard->get("waypoints", s_wps_);
+  wps_ = deserialize_wps(s_wps_);
+
   std::vector<Waypoint>::iterator ptr;
   for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
     if (ptr->id == current_goal_) {
-      RCLCPP_INFO(node_->get_logger(), "waipoint %s tagged as VISITED", ptr->id.c_str());
+      RCLCPP_INFO(node_->get_logger(), "%s VISITED", ptr->id.c_str());
       ptr->visited = true;
       break;
     }

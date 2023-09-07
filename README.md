@@ -14,4 +14,5 @@ ros2 launch bf_patrol bf_3_patrol.launch.py
 
 # Problems 
 * Goal, as soon as it is extracted from the bb, should be marked as IN PROCESS so others do not take it.
+* This implies there should be a process checking if a task has been in process longer than a certain threshold, so it is set back to PENDING. 
 

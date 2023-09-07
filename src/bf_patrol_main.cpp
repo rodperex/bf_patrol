@@ -57,7 +57,7 @@ int main(int argc, char * argv[])
     std::ifstream fin(pkgpath + "/params/patrol_config_house.yaml");
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
-    std::cout << "\t- XML file: " << xml_file << std::endl;
+    // std::cout << "\t- XML file: " << xml_file << std::endl;
     for (const auto & node : params["waypoints"]) {
       Waypoint wp;
       wp.x = node["x"].as<double>();
@@ -73,9 +73,9 @@ int main(int argc, char * argv[])
   }
 
   std::string s_wps = serialize_wps(wps);
-  for (auto wp : wps) {
-    std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
-  }
+  // for (auto wp : wps) {
+  //   std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
+  // }
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("node", node);
@@ -86,7 +86,7 @@ int main(int argc, char * argv[])
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
 
-  std::cout << "\t- Tree created from file" << std::endl;
+  // std::cout << "\t- Tree created from file" << std::endl;
 
   rclcpp::Rate rate(100);
   BT::NodeStatus status;

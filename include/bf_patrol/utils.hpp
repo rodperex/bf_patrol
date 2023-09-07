@@ -17,5 +17,6 @@ struct Waypoint
 
 std::vector<Waypoint> deserialize_wps(std::string s_wps);
 std::string serialize_wps(std::vector<Waypoint> wps);
+void print_wps(std::vector<Waypoint> wps);
 
 #endif

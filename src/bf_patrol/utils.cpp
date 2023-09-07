@@ -50,3 +50,16 @@ std::string serialize_wps(std::vector<Waypoint> wps)
 
   return s_wps;
 }
+
+void print_wps(std::vector<Waypoint> wps)
+{
+  std::cout << "*********" << std::endl;
+  for (auto wp : wps) {
+    std::cout << "\t- " << wp.id << std::endl;
+    // std::cout << "\t\t - x: " << wp.x << std::endl;
+    // std::cout << "\t\t - y: " << wp.y << std::endl;
+    std::cout << "\t\t - visited: " << wp.visited << std::endl;
+    std::cout << "\t\t - in_process: " << wp.in_process << std::endl;
+  }
+  std::cout << "*********" << std::endl;
+}
