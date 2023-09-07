@@ -6,6 +6,8 @@ Based on a example of the book **A Concise Introduction to Robot Programming wit
 
 
 # How to run
+To make it work it is **essential** that following commands are executed **in order**. If the main program is not run before the robots are launched, the shared blackboard will not be configured thus group patrolling will fail.
+
 ```
 ros2 launch multi_robot multi_tb3_simulation.launch.py autostart:=True use_composition:=False
 ros2 run bf_patrol bf_patrol

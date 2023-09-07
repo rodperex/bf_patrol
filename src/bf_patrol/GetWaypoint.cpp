@@ -43,7 +43,7 @@ GetWaypoint::tick()
 
   wps_ = deserialize_wps(s_wps_);
 
-  // print_wps(wps_);
+  print_wps(wps_);
 
   std::vector<Waypoint>::iterator ptr;
   ptr = wps_.begin();
@@ -77,7 +77,7 @@ GetWaypoint::tick()
         break;
       }
     }
-    // print_wps(wps_);
+    print_wps(wps_);
     s_wps_ = serialize_wps(wps_);
     // std::cout << s_wps_ << std::endl;
     config().blackboard->set("waypoints", s_wps_);
