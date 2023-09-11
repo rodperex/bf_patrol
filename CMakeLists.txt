@@ -117,7 +117,7 @@ install(DIRECTORY bt_xml
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(DIRECTORY launch params DESTINATION share/${PROJECT_NAME}/)
+install(DIRECTORY launch params config DESTINATION share/${PROJECT_NAME}/)
 
 
 if(BUILD_TESTING)

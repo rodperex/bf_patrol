@@ -17,7 +17,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 import yaml
@@ -43,7 +43,7 @@ def generate_launch_description():
         arguments=['R1'],
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')]
+            ('output_vel', '/cmd_vel')],
         )
     remote_cmd_2 = Node(
         package='bf_patrol',
@@ -55,7 +55,8 @@ def generate_launch_description():
         arguments=['R2'],
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')]
+            ('output_vel', '/cmd_vel')],
+        # TimerAction(period=1.0)
         )
     remote_cmd_3 = Node(
         package='bf_patrol',
@@ -71,10 +72,25 @@ def generate_launch_description():
         )  
 
     # Create the launch description and populate
-    ld = LaunchDescription()
+    # ld = LaunchDescription()
 
-    ld.add_action(remote_cmd_1)
-    ld.add_action(remote_cmd_2)
-    ld.add_action(remote_cmd_3)
-    
-    return ld
+    # ld.add_action(remote_cmd_1)
+    # ld.add_action(remote_cmd_2)
+    # ld.add_action(remote_cmd_3)
+
+    # return ld
+
+    return LaunchDescription([
+        TimerAction(
+            period=0.0,
+            actions=[remote_cmd_1]
+        ),
+        TimerAction(
+            period=3.0,
+            actions=[remote_cmd_2]
+        ),
+        TimerAction(
+            period=5.0,
+            actions=[remote_cmd_3]
+        )
+    ])

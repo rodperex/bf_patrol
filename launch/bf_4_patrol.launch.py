@@ -17,7 +17,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 import yaml
@@ -36,45 +36,81 @@ def generate_launch_description():
     remote_cmd_1 = Node(
         package='bf_patrol',
         executable='single_remote',
-        name='R1',
+        # name='R1',
         namespace='robot1',
         output='screen',
         parameters=[params],
-        arguments=['patrol_config.yaml'],
+        arguments=['R1'],
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')]
+            ('output_vel', '/cmd_vel')],
         )
     remote_cmd_2 = Node(
         package='bf_patrol',
         executable='single_remote',
-        name='R2',
+        # name='R2',
         namespace='robot2',
         output='screen',
         parameters=[params],
-        arguments=['patrol_config.yaml'],
+        arguments=['R2'],
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')]
+            ('output_vel', '/cmd_vel')],
+        # TimerAction(period=1.0)
         )
     remote_cmd_3 = Node(
         package='bf_patrol',
         executable='single_remote',
-        name='R3',
+        # name='R3',
         namespace='robot3',
         output='screen',
         parameters=[params],
-        arguments=['patrol_config.yaml'],
+        arguments=['R3'],
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')]
         )  
 
-    # Create the launch description and populate
-    ld = LaunchDescription()
+    remote_cmd_4 = Node(
+        package='bf_patrol',
+        executable='single_remote',
+        # name='R4',
+        namespace='robot4',
+        output='screen',
+        parameters=[params],
+        arguments=['R4'],
+        remappings=[
+            ('input_scan', '/scan'),
+            ('output_vel', '/cmd_vel')],
+        # prefix=['xterm -e gdb -ex run --args']
 
-    ld.add_action(remote_cmd_1)
-    ld.add_action(remote_cmd_2)
-    ld.add_action(remote_cmd_3)
-    
-    return ld
+        )  
+
+
+    # Create the launch description and populate
+    # ld = LaunchDescription()
+
+    # ld.add_action(remote_cmd_1)
+    # ld.add_action(remote_cmd_2)
+    # ld.add_action(remote_cmd_3)
+
+    # return ld
+
+    return LaunchDescription([
+        TimerAction(
+            period=0.0,
+            actions=[remote_cmd_1]
+        ),
+        TimerAction(
+            period=3.0,
+            actions=[remote_cmd_2]
+        ),
+        TimerAction(
+            period=5.0,
+            actions=[remote_cmd_3]
+        ),
+        TimerAction(
+            period=7.0,
+            actions=[remote_cmd_4]
+        )
+    ])

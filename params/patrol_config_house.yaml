@@ -1,4 +1,4 @@
-source_tree: /bt_xml/source_2patrol.xml
+source_tree: /bt_xml/source_3patrol.xml
 nodes: 5
 missions:
   - patrol
