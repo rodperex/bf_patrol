@@ -87,7 +87,7 @@ GetWaypoint::tick()
     return BT::NodeStatus::SUCCESS;
   }
   RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "No more WPs to visit");
-  print_wps(wps_);
+  // print_wps(wps_);
   return BT::NodeStatus::FAILURE;
 }
 

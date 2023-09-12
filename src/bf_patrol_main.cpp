@@ -15,6 +15,7 @@
 #include <string>
 #include <memory>
 #include <fstream>
+#include <ctime>
 
 #include "behaviortree_cpp/behavior_tree.h"
 #include "behaviortree_cpp/bt_factory.h"
@@ -91,14 +92,18 @@ int main(int argc, char * argv[])
   rclcpp::Rate rate(100);
   BT::NodeStatus status;
   bool finish = false;
+
+  clock_t start = clock();
   while (!finish && rclcpp::ok()) {
     status = tree.rootNode()->executeTick();
     finish = status != BT::NodeStatus::RUNNING;
-    finish = false;
+    // finish = false;
     rclcpp::spin_some(node);
     rclcpp::spin_some(bb_manager);
-    rate.sleep();
+    // rate.sleep();
   }
+  clock_t stop = clock();
+  
 
   if (status == BT::NodeStatus::SUCCESS) {
     std::cout << "Finished: SUCCESS" << std::endl;
@@ -106,6 +111,8 @@ int main(int argc, char * argv[])
     std::cout << "Finished: FAILURE" << std::endl;
   }
 
+  double duration = static_cast<double>(stop - start) / CLOCKS_PER_SEC;
+  std::cout << "Execution time: " << duration << " seconds" << std::endl;
 
   rclcpp::shutdown();
   return 0;

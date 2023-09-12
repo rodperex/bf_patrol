@@ -2,8 +2,8 @@
 <root BTCPP_format="4"
       main_tree_to_execute="BehaviorTree">
   <BehaviorTree ID="BehaviorTree">
-    <Parallel failure_count="1"
-              success_count="1">
+    <Parallel failure_count="3"
+              success_count="3">
       <DelegateActionNode max_tries="1"
                           mission_id="patrol"
                           plugins="recharge_bt_node, patrol_bt_node, move_bt_node, get_waypoint_bt_node, battery_checker_bt_node, track_objects_bt_node"
