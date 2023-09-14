@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree" BTCPP_format="4">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <ReactiveSequence>
+            <Action ID="Move"/>
+            <RetryUntilSuccessful num_attempts="">
+                <Action ID="GetComponents"/>
+            </RetryUntilSuccessful>
+            <Action ID="Move"/>
+            <Action ID="Assemble"/>
+            <Condition ID="TargetAccomplished"/>
+        </ReactiveSequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="Assemble"/>
+        <Action ID="GetComponentLocation"/>
+        <Action ID="GetComponents"/>
+        <Action ID="Move"/>
+        <Action ID="PickUpComponent"/>
+        <Condition ID="TargetAccomplished"/>
+        <Action ID="Transport"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

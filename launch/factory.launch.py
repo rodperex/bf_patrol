@@ -26,12 +26,6 @@ def generate_launch_description():
     # Get the launch directory
     bf_patrol_dir = get_package_share_directory('bf_patrol')
 
-    params = os.path.join(
-        get_package_share_directory('bf_patrol'),
-        'params',
-        'factory_config.yaml'
-    )
-
     config = os.path.join(bf_patrol_dir, 'config', 'params.yaml')
     with open(config, "r") as stream:
         try:
@@ -47,12 +41,17 @@ def generate_launch_description():
     def create_robot_node(n):
         robot_name = 'robot' + str(n + 1)
         args = ['R' + str(n + 1)]
+
+        if (n == n_robots - 1):
+            args.append('assemble')
+        else:
+            args.append('provide')
+
         robot_cmd = Node(
             package='bf_patrol',
-            executable='single_remote',
+            executable='factory_robot',
             namespace=robot_name,
             output='screen',
-            parameters=[params],
             arguments=args,
             remappings=[
                 ('input_scan', '/scan'),

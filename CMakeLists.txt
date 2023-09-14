@@ -55,6 +55,18 @@ add_library(back_bt_node SHARED src/bf_patrol/Back.cpp)
 add_library(turn_bt_node SHARED src/bf_patrol/Turn.cpp)
 add_library(is_obstacle_bt_node SHARED src/bf_patrol/IsObstacle.cpp)
 
+add_library(get_components_bt_node SHARED src/bf_patrol/GetComponents.cpp)
+add_library(assemble_bt_node SHARED src/bf_patrol/Assemble.cpp)
+add_library(target_bt_node SHARED src/bf_patrol/TargetAccomplished.cpp)
+add_library(get_location_bt_node SHARED src/bf_patrol/GetComponentLocation.cpp)
+add_library(pick_up_bt_node SHARED src/bf_patrol/PickUpComponent.cpp)
+add_library(release_component_bt_node SHARED src/bf_patrol/ReleaseComponent.cpp)
+
+
+
+
+
+
 target_link_libraries(get_waypoint_bt_node utils)
 target_link_libraries(move_bt_node utils)
 
@@ -72,6 +84,13 @@ list(APPEND plugin_libs
   back_bt_node
   turn_bt_node
   is_obstacle_bt_node
+
+  get_components_bt_node
+  assemble_bt_node
+  target_bt_node
+  get_location_bt_node
+  pick_up_bt_node
+  release_component_bt_node
 )
 
 foreach(bt_plugin ${plugin_libs})
@@ -86,6 +105,14 @@ add_executable(bf_patrol src/bf_patrol_main.cpp)
 ament_target_dependencies(bf_patrol ${dependencies})
 target_link_libraries(bf_patrol utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
 
+# add_executable(bf_patrol_wip src/bf_patrol_main_wip.cpp)
+# ament_target_dependencies(bf_patrol_wip ${dependencies})
+# target_link_libraries(bf_patrol_wip utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+
+add_executable(factory src/factory_main.cpp)
+ament_target_dependencies(factory ${dependencies})
+target_link_libraries(factory utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+
 add_executable(remote src/remote_main.cpp)
 ament_target_dependencies(remote ${dependencies})
 # SOLVE THIS!
@@ -97,13 +124,20 @@ add_executable(single_remote src/single_remote_main.cpp)
 ament_target_dependencies(single_remote ${dependencies})
 target_link_libraries(single_remote /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 
+add_executable(factory_robot src/factory_robot.cpp)
+ament_target_dependencies(factory_robot ${dependencies})
+target_link_libraries(factory_robot /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
+
 
 install(TARGETS
   ${plugin_libs}
   bt_patrol
   bf_patrol
+  # bf_patrol_wip
+  factory
   remote
   single_remote
+  factory_robot
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

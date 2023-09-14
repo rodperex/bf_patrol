@@ -1,0 +1,44 @@
+source_patrol_tree:
+  ros__parameters:
+    source_tree: /bt_xml/source_3patrol.xml
+    waypoints:
+      - id: wp1
+        x: 1.6
+        y: 4.5
+        visited: false
+        in_process: false
+      - id: wp2
+        x: -8.0
+        y: -3.0
+        visited: false
+        in_process: false
+      - id: wp3
+        x: 7.0
+        y: -2.0
+        visited: false
+        in_process: false
+      - id: wp4
+        x: -8.0
+        y: 0.0
+        visited: false
+        in_process: false
+      - id: wp5
+        x: 0.0
+        y: 0.0
+        visited: false
+        in_process: false
+      - id: wp6
+        x: 0.0
+        y: -4.0
+        visited: false
+        in_process: false
+      - id: wp7
+        x: -7
+        y: -3.5
+        visited: false
+        in_process: false
+      - id: recharge
+        x: -8.0
+        y: -3.0
+        visited: false
+        in_process: false

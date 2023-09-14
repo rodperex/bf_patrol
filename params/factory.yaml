@@ -1,0 +1,15 @@
+source_tree: /bt_xml/source_factory.xml
+target: 10
+n_pieces_a: 0
+n_pieces_b: 0
+n_assembled: 0
+waypoints:
+  - id: storage_a
+    x: 1.6
+    y: 4.5
+  - id: storage_b
+    x: -8.0
+    y: -3.0
+  - id: assemly_point
+    x: 7.0
+    y: -2.0    
