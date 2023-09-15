@@ -34,12 +34,14 @@ GetComponents::halt()
 BT::NodeStatus
 GetComponents::tick()
 {
+  RCLCPP_DEBUG(rclcpp::get_logger("GetComponents"), "Taking pieces for assembly");
   int n_a, n_b;
   
   config().blackboard->get("n_pieces_a", n_a);
   config().blackboard->get("n_pieces_b", n_b);
 
   if ((n_a > 0) && (n_b > 0)) {
+    RCLCPP_INFO(rclcpp::get_logger("GetComponents"), "Pieces available");
     n_a--;
     n_b--;
     config().blackboard->set("n_pieces_a", n_a);
@@ -47,6 +49,7 @@ GetComponents::tick()
     config().blackboard->set("efbb_goal", "assembly_point");
     return BT::NodeStatus::SUCCESS;
   } else {
+    RCLCPP_DEBUG(rclcpp::get_logger("GetComponents"), "Pieces NOT available");
     return BT::NodeStatus::FAILURE;
   }
 }

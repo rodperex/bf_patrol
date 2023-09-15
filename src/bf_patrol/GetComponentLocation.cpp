@@ -38,13 +38,21 @@ GetComponentLocation::tick()
   
   config().blackboard->get("n_pieces_a", n_a);
   config().blackboard->get("n_pieces_b", n_b);
-  RCLCPP_INFO(rclcpp::get_logger("GetComponentLocation"), "number o piece type A: %d", n_a);
-  RCLCPP_INFO(rclcpp::get_logger("GetComponentLocation"), "number o piece type B: %d", n_b);
+  RCLCPP_INFO(rclcpp::get_logger("GetComponentLocation"), "A: %d | B: %d", n_a, n_b);
 
-  if (n_a > n_b) {
+  if (n_a < n_b) {
     config().blackboard->set("efbb_goal", "storage_a");
-  } else {
+  } else if (n_a > n_b) {
     config().blackboard->set("efbb_goal", "storage_b");
+  } else {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    int rand = std::rand() % 2;
+
+    if (rand == 0) {
+      config().blackboard->set("efbb_goal", "storage_b");
+    } else {
+      config().blackboard->set("efbb_goal", "storage_a");
+    }
   }
   return BT::NodeStatus::SUCCESS;
 

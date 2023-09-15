@@ -51,16 +51,21 @@ ReleaseComponent::tick()
   if (elapsed < 2s) {
     return BT::NodeStatus::RUNNING;
   } else {
-    std::string goal;
+    std::string piece, goal;
     int n;
     config().blackboard->get("efbb_goal", goal);
-    if (goal == "storage_a") {
+    config().blackboard->get("efbb_piece_on_board", piece);
+    if (piece == "A") {
       config().blackboard->get("n_pieces_a", n);
       config().blackboard->set("n_pieces_a", n + 1);
-    } else {
+    } else if (piece == "B") {
       config().blackboard->get("n_pieces_b", n);
       config().blackboard->set("n_pieces_b", n + 1);
     }
+    int n_a, n_b;
+    config().blackboard->get("n_pieces_a", n_a);
+    config().blackboard->get("n_pieces_b", n_b);
+    RCLCPP_INFO(rclcpp::get_logger("ReleaseComponent"), "Releasing component %s at %s (A: %d, B: %d)", piece.c_str(), goal.c_str(), n_a, n_b);
     return BT::NodeStatus::SUCCESS;
   }
 }

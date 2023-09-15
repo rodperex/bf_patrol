@@ -48,7 +48,7 @@ int main(int argc, char * argv[])
 
   std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
-  std::string xml_file;
+  std::string xml_file, default_wp;
   std::vector<Waypoint> wps;
   int target, n_assembled, n_a, n_b;
 
@@ -62,6 +62,7 @@ int main(int argc, char * argv[])
     n_assembled = params["n_assembled"].as<int>(); 
     n_a = params["n_pieces_a"].as<int>();
     n_b = params["n_pieces_b"].as<int>();
+    default_wp = params["default_wp"].as<std::string>();
 
     for (const auto & node : params["waypoints"]) {
       Waypoint wp;
@@ -83,12 +84,6 @@ int main(int argc, char * argv[])
 
   auto blackboard = BT::Blackboard::create();
 
-  // std::vector<std::string> keys_;
-  // for (int i = 0; i < 10; i++) {
-  //   keys_.push_back("key_" + std::to_string(i));
-  //   blackboard->set(keys_[i], i);
-  // }
-
   blackboard->set("node", node);
   blackboard->set("pkgpath", pkgpath + "/bt_xml/");
   blackboard->set("waypoints", s_wps);
@@ -96,6 +91,8 @@ int main(int argc, char * argv[])
   blackboard->set("n_pieces_a", n_a);
   blackboard->set("n_pieces_b", n_b);
   blackboard->set("n_assembled", n_assembled);
+  blackboard->set("n_assembled", n_assembled);
+  blackboard->set("default_goal", default_wp);
 
   auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
 

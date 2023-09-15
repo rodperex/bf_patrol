@@ -38,6 +38,7 @@ Assemble::halt()
 BT::NodeStatus
 Assemble::tick()
 {
+  RCLCPP_INFO(rclcpp::get_logger("Assemble"), "Assembling product");
   if (status() == BT::NodeStatus::IDLE) {
     start_time_ = node_->now();
   }
@@ -51,6 +52,8 @@ Assemble::tick()
   if (elapsed < 2s) {
     return BT::NodeStatus::RUNNING;
   } else {
+    RCLCPP_INFO(rclcpp::get_logger("Assemble"), "Product assembled");
+    config().blackboard->set("efbb_goal", "stacking_point");
     return BT::NodeStatus::SUCCESS;
   }
 }

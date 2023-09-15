@@ -30,23 +30,17 @@ TargetAccomplished::TargetAccomplished(
 BT::NodeStatus
 TargetAccomplished::tick()
 {
-  
-  std::cout << "TargetAccomplished tick" << std::endl;
-  
-
-  // se están propagando como strings, no como enteros
+  RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Target accomplished?");
   int n_assembled;
   int target;
   config().blackboard->get("n_assembled", n_assembled);
   config().blackboard->get("assembly_target", target);
 
-  std::cout << "parameters read from blackboard" << std::endl;
-
   if (n_assembled >= target) {
-    RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Target accomplished");
+    RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Yep! (%d/%d)", n_assembled, target);
     return BT::NodeStatus::SUCCESS;
   } else {
-    RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Target not yet accomplished");
+    RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Nope! (%d/%d)", n_assembled, target);
     return BT::NodeStatus::FAILURE;
   }
 }
