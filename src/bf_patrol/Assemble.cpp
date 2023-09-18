@@ -38,7 +38,7 @@ Assemble::halt()
 BT::NodeStatus
 Assemble::tick()
 {
-  RCLCPP_INFO(rclcpp::get_logger("Assemble"), "Assembling product");
+  RCLCPP_DEBUG(rclcpp::get_logger("Assemble"), "Assembling product");
   if (status() == BT::NodeStatus::IDLE) {
     start_time_ = node_->now();
   }
@@ -52,8 +52,19 @@ Assemble::tick()
   if (elapsed < 2s) {
     return BT::NodeStatus::RUNNING;
   } else {
-    RCLCPP_INFO(rclcpp::get_logger("Assemble"), "Product assembled");
-    config().blackboard->set("efbb_goal", "stacking_point");
+    int n_assembled, target;
+    config().blackboard->get("n_assembled", n_assembled);
+    config().blackboard->get("assembly_target", target);
+    n_assembled++;
+    if (n_assembled == target) {
+      RCLCPP_INFO(rclcpp::get_logger("Assemble"), "ALL products assembled");
+      config().blackboard->set("products_ready", true);
+    } else {
+      config().blackboard->set("products_ready", false);
+    }
+    RCLCPP_INFO(rclcpp::get_logger("Assemble"), "Product assembled: %d done", n_assembled);
+    config().blackboard->set("n_assembled", n_assembled);
+    config().blackboard->set("efbb_goal", "waiting_point");
     return BT::NodeStatus::SUCCESS;
   }
 }

@@ -66,7 +66,7 @@ Move::on_success()
   std::vector<Waypoint>::iterator ptr;
   for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
     if (ptr->id == current_goal_) {
-      RCLCPP_INFO(node_->get_logger(), "%s VISITED", ptr->id.c_str());
+      RCLCPP_INFO(node_->get_logger(), "robot at %s", ptr->id.c_str());
       ptr->visited = true;
       break;
     }

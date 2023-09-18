@@ -1,19 +1,22 @@
 source_tree: /bt_xml/source_factory.xml
-target: 10
+target: 1
 n_pieces_a: 0
 n_pieces_b: 0
 n_assembled: 0
-default_wp: stacking_point
+default_wp: waiting_point
 waypoints:
   - id: storage_a
-    x: 1.6
-    y: 4.5
+    x: 1.8
+    y: -1.4
   - id: storage_b
-    x: -8.0
-    y: -3.0
+    x: 1.6
+    y: -7.0
   - id: stacking_point
-    x: 7.0
-    y: -1.5
-  - id: assemly_point
-    x: 7.0
-    y: -2.0    
+    x: 0.5
+    y: 2.3
+  - id: assembly_point
+    x: 0.2
+    y: -7.5
+  - id: waiting_point
+    x: 0.5
+    y: 5.25

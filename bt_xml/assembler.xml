@@ -2,10 +2,10 @@
 <root main_tree_to_execute="BehaviorTree" BTCPP_format="4">
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
-        <RetryUntilSuccessful num_attempts="5000">
+        <RetryUntilSuccessful num_attempts="99999">
             <Sequence>
                 <Action ID="Move"/>
-                <RetryUntilSuccessful num_attempts="99999999999">
+                <RetryUntilSuccessful num_attempts="99999">
                     <Action ID="GetComponents"/>
                 </RetryUntilSuccessful>
                 <Action ID="Move"/>

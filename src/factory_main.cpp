@@ -91,8 +91,8 @@ int main(int argc, char * argv[])
   blackboard->set("n_pieces_a", n_a);
   blackboard->set("n_pieces_b", n_b);
   blackboard->set("n_assembled", n_assembled);
-  blackboard->set("n_assembled", n_assembled);
   blackboard->set("default_goal", default_wp);
+  blackboard->set("products_ready", false);
 
   auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
 

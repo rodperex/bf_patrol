@@ -31,12 +31,15 @@ BT::NodeStatus
 TargetAccomplished::tick()
 {
   RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Target accomplished?");
-  int n_assembled;
-  int target;
+  int n_assembled, target, n_a, n_b;
+  bool products_ready;
   config().blackboard->get("n_assembled", n_assembled);
   config().blackboard->get("assembly_target", target);
+  config().blackboard->get("n_pieces_a", n_a);
+  config().blackboard->get("n_pieces_b", n_b);
+  config().blackboard->get("products_ready", products_ready);
 
-  if (n_assembled >= target) {
+  if (products_ready) {
     RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Yep! (%d/%d)", n_assembled, target);
     return BT::NodeStatus::SUCCESS;
   } else {

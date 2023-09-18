@@ -41,11 +41,11 @@ GetComponents::tick()
   config().blackboard->get("n_pieces_b", n_b);
 
   if ((n_a > 0) && (n_b > 0)) {
-    RCLCPP_INFO(rclcpp::get_logger("GetComponents"), "Pieces available");
+    RCLCPP_INFO(rclcpp::get_logger("GetComponents"), "Pieces available (A: %d, B: %d)", n_a, n_b);
     n_a--;
     n_b--;
     config().blackboard->set("n_pieces_a", n_a);
-    config().blackboard->set("n_pieces_a", n_b);
+    config().blackboard->set("n_pieces_b", n_b);
     config().blackboard->set("efbb_goal", "assembly_point");
     return BT::NodeStatus::SUCCESS;
   } else {
