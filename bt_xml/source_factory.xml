@@ -8,13 +8,13 @@
                           mission_id="provide"
                           plugins="target_bt_node, get_location_bt_node, pick_up_bt_node, move_bt_node, release_component_bt_node"
                           remote_id=""
-                          remote_tree="components_provider.xml"
+                          remote_tree="components_provider2.xml"
                           timeout=""/>
       <DelegateActionNode max_tries="1"
                           mission_id="provide"
                           plugins="target_bt_node, get_location_bt_node, pick_up_bt_node, move_bt_node, release_component_bt_node"
                           remote_id=""
-                          remote_tree="components_provider.xml"
+                          remote_tree="components_provider2.xml"
                           timeout=""/>
       <DelegateActionNode max_tries="1"
                           mission_id="assemble"
