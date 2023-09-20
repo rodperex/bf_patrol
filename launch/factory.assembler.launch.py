@@ -41,6 +41,8 @@ def generate_launch_description():
             ('output_vel', '/cmd_vel')
         ]
     )
+
+    ld.add_action(robot_cmd)
    
 
     return ld

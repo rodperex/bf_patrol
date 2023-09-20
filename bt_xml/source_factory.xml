@@ -4,24 +4,24 @@
   <BehaviorTree ID="BehaviorTree">
     <Parallel failure_count="2"
               success_count="2">
-      <DelegateActionNode max_tries="1"
+      <DelegateActionNode max_tries="5"
                           mission_id="provide"
                           plugins="target_bt_node, get_location_bt_node, pick_up_bt_node, move_bt_node, release_component_bt_node"
                           remote_id=""
-                          remote_tree="components_provider2.xml"
-                          timeout=""/>
-      <DelegateActionNode max_tries="1"
+                          remote_tree="components_provider.xml"
+                          timeout="10"/>
+      <DelegateActionNode max_tries="5"
                           mission_id="provide"
                           plugins="target_bt_node, get_location_bt_node, pick_up_bt_node, move_bt_node, release_component_bt_node"
                           remote_id=""
-                          remote_tree="components_provider2.xml"
-                          timeout=""/>
-      <DelegateActionNode max_tries="1"
+                          remote_tree="components_provider.xml"
+                          timeout="10"/>
+      <DelegateActionNode max_tries="5"
                           mission_id="assemble"
                           plugins="get_components_bt_node, move_bt_node, assemble_bt_node, target_bt_node"
                           remote_id=""
                           remote_tree="assembler.xml"
-                          timeout=""/>
+                          timeout="10"/>
     </Parallel>
   </BehaviorTree>
 

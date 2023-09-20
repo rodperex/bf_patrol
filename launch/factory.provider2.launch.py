@@ -42,6 +42,7 @@ def generate_launch_description():
         ]
     )
    
+    ld.add_action(robot_cmd)
 
     return ld
 

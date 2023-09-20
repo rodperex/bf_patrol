@@ -33,6 +33,9 @@ Move::on_tick()
   config().blackboard->get("efbb_goal", current_goal_);
 
   if (current_goal_ == "") {
+    // std::string id;
+    // config().blackboard->get("efbb_robot_id", id);  
+    // config().blackboard->get("waiting_point_" + id, current_goal_);
     config().blackboard->get("default_goal", current_goal_);
   }
 
