@@ -3,7 +3,7 @@ target: 5
 n_pieces_a: 0
 n_pieces_b: 0
 n_assembled: 0
-default_wp: waiting_point
+default_wp: collection_point
 waypoints:
   - id: storage_a
     x: 1.8
@@ -17,9 +17,9 @@ waypoints:
   - id: assembly_point
     x: -1.6
     y: 0.01
-  - id: waiting_point
-    x: 0.5
-    y: 5.25
+  - id: collection_point
+    x: -2.5
+    y: -0.4
   - id: waiting_point_robot1
     x: 0.0
     y: 0.0

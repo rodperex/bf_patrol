@@ -65,7 +65,10 @@ ReleaseComponent::tick()
     int n_a, n_b;
     config().blackboard->get("n_pieces_a", n_a);
     config().blackboard->get("n_pieces_b", n_b);
-    RCLCPP_INFO(rclcpp::get_logger("ReleaseComponent"), "Releasing component %s at %s (A: %d, B: %d)", piece.c_str(), goal.c_str(), n_a, n_b);
+    RCLCPP_INFO(
+      rclcpp::get_logger(
+        "ReleaseComponent"), "Releasing component %s at %s (A: %d, B: %d)",
+      piece.c_str(), goal.c_str(), n_a, n_b);
     return BT::NodeStatus::SUCCESS;
   }
 }

@@ -43,7 +43,7 @@ TargetAccomplished::tick()
     RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Yep! (%d/%d)", n_assembled, target);
     std::string id;
     config().blackboard->get("efbb_robot_id", id);
-    config().blackboard->set("efbb_goal",   "waiting_point_" + id);
+    config().blackboard->set("efbb_goal", "waiting_point_" + id);
     return BT::NodeStatus::SUCCESS;
   } else {
     RCLCPP_INFO(rclcpp::get_logger("TargetAccomplished"), "Nope! (%d/%d)", n_assembled, target);

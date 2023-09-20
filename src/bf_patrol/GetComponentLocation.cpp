@@ -35,7 +35,7 @@ BT::NodeStatus
 GetComponentLocation::tick()
 {
   int n_a, n_b;
-  
+
   config().blackboard->get("n_pieces_a", n_a);
   config().blackboard->get("n_pieces_b", n_b);
   RCLCPP_INFO(rclcpp::get_logger("GetComponentLocation"), "A: %d | B: %d", n_a, n_b);

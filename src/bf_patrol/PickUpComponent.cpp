@@ -47,7 +47,7 @@ PickUpComponent::tick()
   } else if (location == "storage_b") {
     config().blackboard->set("efbb_piece_on_board", "B");
   }
- 
+
   if (status() == BT::NodeStatus::IDLE) {
     start_time_ = node_->now();
   }
@@ -61,7 +61,9 @@ PickUpComponent::tick()
   if (elapsed < 2s) {
     return BT::NodeStatus::RUNNING;
   } else {
-    RCLCPP_INFO(rclcpp::get_logger("PickUpComponent"), "Component picked up at %s", location.c_str());
+    RCLCPP_INFO(
+      rclcpp::get_logger("PickUpComponent"), "Component picked up at %s",
+      location.c_str());
     config().blackboard->set("efbb_goal", "stacking_point");
     return BT::NodeStatus::SUCCESS;
   }

@@ -34,7 +34,7 @@ Move::on_tick()
 
   if (current_goal_ == "") {
     // std::string id;
-    // config().blackboard->get("efbb_robot_id", id);  
+    // config().blackboard->get("efbb_robot_id", id);
     // config().blackboard->get("waiting_point_" + id, current_goal_);
     config().blackboard->get("default_goal", current_goal_);
   }
@@ -61,7 +61,7 @@ Move::on_tick()
 BT::NodeStatus
 Move::on_success()
 {
-  
+
   // we need to load again the waypoints in case the entry has been changed by another robot
   config().blackboard->get("waypoints", s_wps_);
   wps_ = deserialize_wps(s_wps_);

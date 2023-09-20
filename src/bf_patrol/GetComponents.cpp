@@ -36,7 +36,7 @@ GetComponents::tick()
 {
   RCLCPP_DEBUG(rclcpp::get_logger("GetComponents"), "Taking pieces for assembly");
   int n_a, n_b;
-  
+
   config().blackboard->get("n_pieces_a", n_a);
   config().blackboard->get("n_pieces_b", n_b);
 

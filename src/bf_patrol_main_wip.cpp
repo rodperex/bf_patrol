@@ -68,7 +68,7 @@ int main(int argc, char * argv[])
 
   std::string xml_file;
   xml_file = pkgpath + source_tree;
-   
+
 
   // std::string s_wps = serialize_wps(wps);
   std::string s_wps = "";
@@ -93,7 +93,7 @@ int main(int argc, char * argv[])
     rclcpp::spin_some(bb_manager);
   }
   clock_t stop = clock();
-  
+
 
   if (status == BT::NodeStatus::SUCCESS) {
     std::cout << "Finished: SUCCESS" << std::endl;

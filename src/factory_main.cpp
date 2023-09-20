@@ -59,7 +59,7 @@ int main(int argc, char * argv[])
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
     target = params["target"].as<int>();
-    n_assembled = params["n_assembled"].as<int>(); 
+    n_assembled = params["n_assembled"].as<int>();
     n_a = params["n_pieces_a"].as<int>();
     n_b = params["n_pieces_b"].as<int>();
     default_wp = params["default_wp"].as<std::string>();
@@ -80,7 +80,6 @@ int main(int argc, char * argv[])
 
   std::string s_wps = serialize_wps(wps);
 
-  
 
   auto blackboard = BT::Blackboard::create();
 
@@ -110,7 +109,7 @@ int main(int argc, char * argv[])
     rclcpp::spin_some(bb_manager);
   }
   clock_t stop = clock();
-  
+
 
   if (status == BT::NodeStatus::SUCCESS) {
     std::cout << "Finished: SUCCESS" << std::endl;

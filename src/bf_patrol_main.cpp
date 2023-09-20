@@ -103,7 +103,7 @@ int main(int argc, char * argv[])
     // rate.sleep();
   }
   clock_t stop = clock();
-  
+
 
   if (status == BT::NodeStatus::SUCCESS) {
     std::cout << "Finished: SUCCESS" << std::endl;

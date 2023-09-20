@@ -64,7 +64,7 @@ Assemble::tick()
     }
     RCLCPP_INFO(rclcpp::get_logger("Assemble"), "Product assembled: %d done", n_assembled);
     config().blackboard->set("n_assembled", n_assembled);
-    config().blackboard->set("efbb_goal", "waiting_point");
+    config().blackboard->set("efbb_goal", "collection_point");
     return BT::NodeStatus::SUCCESS;
   }
 }
