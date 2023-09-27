@@ -45,11 +45,11 @@ def generate_launch_description():
         if (n == n_robots - 1):
             args.append('assemble')
         else:
-            args.append('provide')
+            args.append('generic')
 
         robot_cmd = Node(
             package='bf_patrol',
-            executable='factory_robot',
+            executable='worker',
             namespace=robot_name,
             output='screen',
             arguments=args,

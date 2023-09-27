@@ -6,6 +6,12 @@ This package exemplifies the capabilitites of the [behaviorfleets](https://githu
 
 Everything here is based on a example of the book **A Concise Introduction to Robot Programming with ROS2**. Do not miss the opportunity to learn from this super book.
 
+# Examples
+
+* Visiting a set of waypoints
+* Manufacturing
+* Mixed (TBD): in this example, the robots that are not manufacturing products are configured to execute generic tasks so when they can swap roles according to the work to be done
+
 # How to run
 To make it work it is **essential** that following commands are executed **in order**. If the main program is not run before the robots are launched, the shared blackboard will not be configured thus group patrolling will fail.
 

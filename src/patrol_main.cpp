@@ -39,7 +39,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
 
-  auto node = rclcpp::Node::make_shared("source_patrol_tree");
+  auto node = rclcpp::Node::make_shared("patrol");
 
   BT::SharedLibrary loader;
   BT::BehaviorTreeFactory factory;
@@ -49,13 +49,12 @@ int main(int argc, char * argv[])
   std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
   std::string xml_file;
-
   std::vector<Waypoint> wps;
 
 
   try {
     // Load the XML path from the YAML file
-    std::ifstream fin(pkgpath + "/params/patrol_config_house.yaml");
+    std::ifstream fin(pkgpath + "/params/patrol_factory.yaml");
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
     // std::cout << "\t- XML file: " << xml_file << std::endl;
@@ -74,9 +73,6 @@ int main(int argc, char * argv[])
   }
 
   std::string s_wps = serialize_wps(wps);
-  // for (auto wp : wps) {
-  //   std::cout << "\t- WP: " << wp.x << ", " << wp.y << std::endl;
-  // }
 
   auto blackboard = BT::Blackboard::create();
   blackboard->set("node", node);
@@ -86,8 +82,6 @@ int main(int argc, char * argv[])
   auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
-
-  // std::cout << "\t- Tree created from file" << std::endl;
 
   rclcpp::Rate rate(100);
   BT::NodeStatus status;

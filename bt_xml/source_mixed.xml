@@ -14,7 +14,7 @@
                           mission_id="generic"
                           plugins="target_bt_node, get_location_bt_node, pick_up_bt_node, move_bt_node, release_component_bt_node"
                           remote_id=""
-                          remote_tree="components_provider.xml"
+                          remote_tree="patrol.xml"
                           timeout="10"/>
       <DelegateActionNode max_tries="5"
                           mission_id="assemble"

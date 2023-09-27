@@ -1,4 +1,4 @@
-source_patrol_tree:
+patrol:
   ros__parameters:
     source_tree: /bt_xml/source_3patrol.xml
     waypoints:

@@ -28,12 +28,12 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    args = ['R2', 'provide']
+    args = ['R3', 'generic']
 
     robot_cmd = Node(
         package='bf_patrol',
-        executable='factory_robot',
-        namespace="robot2",
+        executable='worker',
+        namespace="robot3",
         output='screen',
         arguments=args,
         remappings=[

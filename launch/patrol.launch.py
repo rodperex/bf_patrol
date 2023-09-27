@@ -49,7 +49,7 @@ def generate_launch_description():
         args = ['R' + str(n + 1)]
         robot_cmd = Node(
             package='bf_patrol',
-            executable='single_remote',
+            executable='worker',
             namespace=robot_name,
             output='screen',
             parameters=[params],

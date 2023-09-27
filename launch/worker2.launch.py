@@ -17,38 +17,32 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 import yaml
 
-
 def generate_launch_description():
     # Get the launch directory
-    sp_dir = get_package_share_directory('bf_patrol')
+    bf_patrol_dir = get_package_share_directory('bf_patrol')
 
-    params = os.path.join(
-        get_package_share_directory('bf_patrol'),
-        'params',
-        'remote_config.yaml'
-    )
-  
-    remote_cmd = Node(
-        package='bf_patrol',
-        executable='single_remote',
-        # name='remote',
-        namespace='robot2',
-        output='screen',
-        parameters=[params],
-        arguments=['R2'],
-        remappings=[
-            ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')]
-        )  
-
-    # Create the launch description and populate
     ld = LaunchDescription()
 
-    ld.add_action(remote_cmd)
-    
+    args = ['R2', 'generic']
+
+    robot_cmd = Node(
+        package='bf_patrol',
+        executable='worker',
+        namespace="robot2",
+        output='screen',
+        arguments=args,
+        remappings=[
+            ('input_scan', '/scan'),
+            ('output_vel', '/cmd_vel')
+        ]
+    )
+   
+    ld.add_action(robot_cmd)
+
     return ld
+

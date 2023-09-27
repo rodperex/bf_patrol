@@ -101,9 +101,9 @@ endforeach()
 add_executable(bt_patrol src/bt_patrol_main.cpp)
 ament_target_dependencies(bt_patrol ${dependencies})
 
-add_executable(bf_patrol src/bf_patrol_main.cpp)
-ament_target_dependencies(bf_patrol ${dependencies})
-target_link_libraries(bf_patrol utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+add_executable(patrol src/patrol_main.cpp)
+ament_target_dependencies(patrol ${dependencies})
+target_link_libraries(patrol utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
 
 # add_executable(bf_patrol_wip src/bf_patrol_main_wip.cpp)
 # ament_target_dependencies(bf_patrol_wip ${dependencies})
@@ -119,25 +119,19 @@ ament_target_dependencies(remote ${dependencies})
 target_link_libraries(remote yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 # target_link_libraries(remote_tree yaml-cpp remote_delegate_action_node)
 
+add_executable(worker src/worker_robot.cpp)
+ament_target_dependencies(worker ${dependencies})
+target_link_libraries(worker /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 
-add_executable(single_remote src/single_remote_main.cpp)
-ament_target_dependencies(single_remote ${dependencies})
-target_link_libraries(single_remote /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
-
-add_executable(factory_robot src/factory_robot.cpp)
-ament_target_dependencies(factory_robot ${dependencies})
-target_link_libraries(factory_robot /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 
 
 install(TARGETS
   ${plugin_libs}
   bt_patrol
-  bf_patrol
-  # bf_patrol_wip
+  patrol
   factory
   remote
-  single_remote
-  factory_robot
+  worker
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
