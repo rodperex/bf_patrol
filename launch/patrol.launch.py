@@ -29,7 +29,7 @@ def generate_launch_description():
     params = os.path.join(
         get_package_share_directory('bf_patrol'),
         'params',
-        'factory_config.yaml'
+        'patrol_config.yaml'
     )
 
     config = os.path.join(bf_patrol_dir, 'config', 'params.yaml')

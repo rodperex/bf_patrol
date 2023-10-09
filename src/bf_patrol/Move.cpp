@@ -40,12 +40,12 @@ Move::on_tick()
   }
 
   RCLCPP_INFO(rclcpp::get_logger("Move"), "Going to %s", current_goal_.c_str());
-
   config().blackboard->get("waypoints", s_wps_);
   wps_ = deserialize_wps(s_wps_);
 
   for (auto wp:wps_) {
     if (wp.id == current_goal_) {
+      RCLCPP_DEBUG(rclcpp::get_logger("Move"), "Coordinates: (%f, %f)", wp.x, wp.y);
       geometry_msgs::msg::PoseStamped goal;
       goal.header.frame_id = "map";
       goal.pose.orientation.w = 1.0;
@@ -55,6 +55,7 @@ Move::on_tick()
       break;
     }
   }
+  
 
 }
 

@@ -103,7 +103,7 @@ ament_target_dependencies(bt_patrol ${dependencies})
 
 add_executable(patrol src/patrol_main.cpp)
 ament_target_dependencies(patrol ${dependencies})
-target_link_libraries(patrol utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+target_link_libraries(patrol utils yaml-cpp /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
 
 # add_executable(bf_patrol_wip src/bf_patrol_main_wip.cpp)
 # ament_target_dependencies(bf_patrol_wip ${dependencies})
@@ -111,17 +111,17 @@ target_link_libraries(patrol utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/beha
 
 add_executable(factory src/factory_main.cpp)
 ament_target_dependencies(factory ${dependencies})
-target_link_libraries(factory utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+target_link_libraries(factory utils yaml-cpp /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
 
 add_executable(remote src/remote_main.cpp)
 ament_target_dependencies(remote ${dependencies})
 # SOLVE THIS!
-target_link_libraries(remote yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
+target_link_libraries(remote yaml-cpp /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 # target_link_libraries(remote_tree yaml-cpp remote_delegate_action_node)
 
 add_executable(worker src/worker_robot.cpp)
 ament_target_dependencies(worker ${dependencies})
-target_link_libraries(worker /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
+target_link_libraries(worker /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
 
 
 

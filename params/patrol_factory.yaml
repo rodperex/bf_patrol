@@ -35,11 +35,6 @@ waypoints:
     y: 1.0
     visited: false
     in_process: false
-  - id: wp8
-    x: 1.0
-    y: 2.0
-    visited: false
-    in_process: false
   - id: recharge
     x: 2.0
     y: 2.0

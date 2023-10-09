@@ -79,7 +79,6 @@ GetWaypoint::tick()
     }
     // print_wps(wps_);
     s_wps_ = serialize_wps(wps_);
-    // std::cout << s_wps_ << std::endl;
     config().blackboard->set("waypoints", s_wps_);
     RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "waypoint %s IN PROCESS", ptr->id.c_str());
     // END tagging

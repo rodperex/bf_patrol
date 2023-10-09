@@ -80,7 +80,6 @@ int main(int argc, char * argv[])
 
   std::string s_wps = serialize_wps(wps);
 
-
   auto blackboard = BT::Blackboard::create();
 
   blackboard->set("node", node);
@@ -93,7 +92,10 @@ int main(int argc, char * argv[])
   blackboard->set("default_goal", default_wp);
   blackboard->set("products_ready", false);
 
+
+
   auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
+
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
 
