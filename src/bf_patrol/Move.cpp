@@ -77,8 +77,9 @@ Move::on_success()
   }
 
   s_wps_ = serialize_wps(wps_);
-
   config().blackboard->set("waypoints", s_wps_);
+  
+  RCLCPP_DEBUG(node_->get_logger(), "WPs %s", s_wps_.c_str());
   RCLCPP_INFO(node_->get_logger(), "** NAVIGATION SUCCEEDED **");
 
   return BT::NodeStatus::SUCCESS;

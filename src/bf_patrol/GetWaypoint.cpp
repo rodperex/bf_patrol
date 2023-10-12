@@ -37,24 +37,26 @@ GetWaypoint::tick()
 {
   bool pending_wps = false;
   std::string id;
+  std::vector<Waypoint>::iterator ptr;
+  
   getInput("wp_id", id);
-
   config().blackboard->get("waypoints", s_wps_);
 
   wps_ = deserialize_wps(s_wps_);
-
-  // print_wps(wps_);
-
-  std::vector<Waypoint>::iterator ptr;
   ptr = wps_.begin();
 
-  if (id != "recharge") {
+    if (id != "recharge") {
     while (ptr != wps_.end() && !pending_wps) {
       RCLCPP_DEBUG(rclcpp::get_logger("GetWaypoint"), "Analyzing: %s", ptr->id.c_str());
       if (!ptr->visited && (ptr->id != "recharge") && !ptr->in_process) {
         RCLCPP_DEBUG(rclcpp::get_logger("GetWaypoint"), "WP %s set as goal", ptr->id.c_str());
         id = ptr->id;
         pending_wps = true;
+        ptr->in_process = true; // tag here
+        s_wps_ = serialize_wps(wps_);
+        config().blackboard->set("waypoints", s_wps_);
+      } else {
+        RCLCPP_DEBUG(rclcpp::get_logger("GetWaypoint"), "%s: visited or in process", ptr->id.c_str());
       }
       ++ptr;
     }
@@ -62,7 +64,7 @@ GetWaypoint::tick()
     pending_wps = true;
   }
 
-  RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "ID: %s", id.c_str());
+  RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "GOAL: %s", id.c_str());
 
   if (pending_wps) {
     // setOutput("waypoint", id);
@@ -70,23 +72,26 @@ GetWaypoint::tick()
     RCLCPP_DEBUG(rclcpp::get_logger("GetWaypoint"), "WP %s set as goal in the bb", id.c_str());
 
     // we need to tag this WP as IN PROCESS so no other robot takes it
-    std::vector<Waypoint>::iterator ptr;
-    for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
-      if ((ptr->id == id) && (ptr->id != "recharge")) {
-        ptr->in_process = true;
-        break;
-      }
-    }
-    // print_wps(wps_);
-    s_wps_ = serialize_wps(wps_);
-    config().blackboard->set("waypoints", s_wps_);
-    RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "waypoint %s IN PROCESS", ptr->id.c_str());
+    // std::vector<Waypoint>::iterator ptr;
+    // for (ptr = wps_.begin(); ptr != wps_.end(); ptr++) {
+    //   if ((ptr->id == id) && (ptr->id != "recharge")) {
+    //     ptr->in_process = true;
+    //     break;
+    //   }
+    // }
+
+    // s_wps_ = serialize_wps(wps_);
+    // config().blackboard->set("waypoints", s_wps_);
     // END tagging
 
+    // RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "waypoint %s IN PROCESS", ptr->id.c_str());
+    
     return BT::NodeStatus::SUCCESS;
   }
   RCLCPP_INFO(rclcpp::get_logger("GetWaypoint"), "No more WPs to visit");
-  // print_wps(wps_);
+  std::string robot_id;
+  config().blackboard->get("efbb_robot_id", robot_id);
+  config().blackboard->set("efbb_goal", "waiting_point_" + robot_id);
   return BT::NodeStatus::FAILURE;
 }
 

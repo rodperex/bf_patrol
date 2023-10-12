@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree" BTCPP_format="4">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Inverter>
+            <KeepRunningUntilFailure>
+                <ReactiveSequence>
+                    <Fallback>
+                        <Action ID="BatteryChecker"/>
+                        <Sequence>
+                            <Action ID="GetWaypoint" wp_id="recharge"/>
+                            <Action ID="Move"/>
+                            <Action ID="Recharge"/>
+                        </Sequence>
+                    </Fallback>
+                    <Sequence>
+                        <Action ID="GetWaypoint" wp_id="next"/>
+                        <Action ID="Move"/>
+                        <Action ID="Patrol"/>
+                    </Sequence>
+                </ReactiveSequence>
+            </KeepRunningUntilFailure>
+        </Inverter>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="BatteryChecker"/>
+        <Action ID="GetWaypoint">
+            <input_port name="wp_id"/>
+        </Action>
+        <Action ID="Move">
+        </Action>
+        <Action ID="Patrol"/>
+        <Action ID="Recharge"/>
+        <Action ID="TrackObjects"/>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

@@ -3,7 +3,7 @@
     <!-- ////////// -->
     <BehaviorTree ID="BehaviorTree">
         <Action ID="DelegateActionNode"
-            mission_id="patrol"
+            mission_id="generic"
             plugins="recharge_bt_node, patrol_bt_node, move_bt_node, get_waypoint_bt_node, battery_checker_bt_node, track_objects_bt_node"
             remote_tree="patrol.xml"
             remote_id=""

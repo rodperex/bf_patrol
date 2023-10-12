@@ -1,5 +1,6 @@
 source_tree: /bt_xml/source_factory.xml
-target: 10
+manager_hz: 100
+target: 3
 n_pieces_a: 0
 n_pieces_b: 0
 n_assembled: 0
@@ -21,11 +22,11 @@ waypoints:
     x: -2.5
     y: -0.4
   - id: waiting_point_robot1
-    x: 0.0
-    y: 0.0
+    x: 5.2
+    y: 1.82
   - id: waiting_point_robot2
-    x: 0.0
-    y: 1.0
+    x: 0.8
+    y: 6.41
   - id: waiting_point_robot3
-    x: 1.0
-    y: 2.0
+    x: 0.6
+    y: -7.68

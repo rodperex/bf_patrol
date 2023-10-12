@@ -2,18 +2,15 @@
 <root BTCPP_format="4"
       main_tree_to_execute="BehaviorTree">
   <BehaviorTree ID="BehaviorTree">
-    <Sequence>
-      <Inverter>
-        <KeepRunningUntilFailure>
-          <Sequence>
-            <GetWaypoint wp_id="next"/>
-            <Move/>
-            <Patrol/>
-          </Sequence>
-        </KeepRunningUntilFailure>
-      </Inverter>
-      <Move/>
-    </Sequence>
+    <Inverter>
+      <KeepRunningUntilFailure>
+        <Sequence>
+          <GetWaypoint wp_id="next"/>
+          <Move/>
+          <Patrol/>
+        </Sequence>
+      </KeepRunningUntilFailure>
+    </Inverter>
   </BehaviorTree>
 
   <!-- Description of Node Models (used by Groot) -->

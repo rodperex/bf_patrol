@@ -50,7 +50,7 @@ int main(int argc, char * argv[])
 
   std::string xml_file, default_wp;
   std::vector<Waypoint> wps;
-  int target, n_assembled, n_a, n_b;
+  int target, n_assembled, n_a, n_b, freq;
 
 
   try {
@@ -58,6 +58,7 @@ int main(int argc, char * argv[])
     std::ifstream fin(pkgpath + "/params/factory.yaml");
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
+    freq = params["manager_hz"].as<int>();
     target = params["target"].as<int>();
     n_assembled = params["n_assembled"].as<int>();
     n_a = params["n_pieces_a"].as<int>();
@@ -93,8 +94,10 @@ int main(int argc, char * argv[])
   blackboard->set("products_ready", false);
 
 
-
-  auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
+  auto period = std::chrono::duration_cast<std::chrono::milliseconds>(
+      std::chrono::duration<float, std::milli>((1 / freq) * 1000)
+  );
+  auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard, period, 1000);
 
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);

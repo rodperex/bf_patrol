@@ -50,6 +50,7 @@ int main(int argc, char * argv[])
 
   std::string xml_file;
   std::vector<Waypoint> wps;
+  int freq;
 
 
   try {
@@ -57,14 +58,15 @@ int main(int argc, char * argv[])
     std::ifstream fin(pkgpath + "/params/patrol_factory.yaml");
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
-    // std::cout << "\t- XML file: " << xml_file << std::endl;
+    freq = params["manager_hz"].as<int>();
+    std::cout << "\t- XML file: " << xml_file << std::endl;
     for (const auto & node : params["waypoints"]) {
       Waypoint wp;
       wp.x = node["x"].as<double>();
       wp.y = node["y"].as<double>();
       wp.id = node["id"].as<std::string>();
-      wp.visited = false;
-      wp.in_process = false;
+      wp.visited = node["visited"].as<bool>();
+      wp.in_process = node["in_process"].as<bool>();
       wps.push_back(wp);
     }
   } catch (YAML::Exception & e) {
@@ -79,11 +81,16 @@ int main(int argc, char * argv[])
   blackboard->set("pkgpath", pkgpath + "/bt_xml/");
   blackboard->set("waypoints", s_wps);
 
-  auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard);
+  auto period = std::chrono::duration_cast<std::chrono::milliseconds>(
+      std::chrono::duration<float, std::milli>((1 / freq) * 1000)
+  );
+
+  auto bb_manager = std::make_shared<BF::BlackboardManager>(blackboard, period, 1000);
+  
 
   BT::Tree tree = factory.createTreeFromFile(xml_file, blackboard);
 
-  rclcpp::Rate rate(100);
+  // rclcpp::Rate rate(100);
   BT::NodeStatus status;
   bool finish = false;
 
