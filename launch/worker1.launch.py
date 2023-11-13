@@ -30,6 +30,7 @@ def generate_launch_description():
 
     args = ['R1', 'generic']
 
+
     robot_cmd = Node(
         package='bf_patrol',
         executable='worker',
@@ -38,7 +39,8 @@ def generate_launch_description():
         arguments=args,
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')
+            ('output_vel', '/cmd_vel'),
+            ('/tf', '/robot1/tf'),
         ]
     )
 

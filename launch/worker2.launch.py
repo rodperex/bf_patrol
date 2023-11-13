@@ -38,7 +38,8 @@ def generate_launch_description():
         arguments=args,
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')
+            ('output_vel', '/cmd_vel'),
+            ('/tf', '/robot2/tf'),
         ]
     )
    
