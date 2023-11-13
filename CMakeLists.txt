@@ -31,19 +31,15 @@ set(dependencies
     sensor_msgs
     nav2_msgs
     ament_index_cpp
-    behaviorfleets
     bf_msgs
 )
 
-
 include_directories(
   include
-  # ${ament_INCLUDE_DIRS}
-  # ${CMAKE_CURRENT_SOURCE_DIR}/../../install/behaviorfleets/include
+  ${behaviorfleets_INCLUDE_DIRS}
 )
 
 add_library(utils SHARED src/bf_patrol/utils.cpp)
-
 add_library(recharge_bt_node SHARED src/bf_patrol/Recharge.cpp)
 add_library(patrol_bt_node SHARED src/bf_patrol/Patrol.cpp)
 add_library(move_bt_node SHARED src/bf_patrol/Move.cpp)
@@ -54,7 +50,6 @@ add_library(forward_bt_node SHARED src/bf_patrol/Forward.cpp)
 add_library(back_bt_node SHARED src/bf_patrol/Back.cpp)
 add_library(turn_bt_node SHARED src/bf_patrol/Turn.cpp)
 add_library(is_obstacle_bt_node SHARED src/bf_patrol/IsObstacle.cpp)
-
 add_library(get_components_bt_node SHARED src/bf_patrol/GetComponents.cpp)
 add_library(assemble_bt_node SHARED src/bf_patrol/Assemble.cpp)
 add_library(target_bt_node SHARED src/bf_patrol/TargetAccomplished.cpp)
@@ -62,16 +57,8 @@ add_library(get_location_bt_node SHARED src/bf_patrol/GetComponentLocation.cpp)
 add_library(pick_up_bt_node SHARED src/bf_patrol/PickUpComponent.cpp)
 add_library(release_component_bt_node SHARED src/bf_patrol/ReleaseComponent.cpp)
 
-
-
-
-
-
 target_link_libraries(get_waypoint_bt_node utils)
 target_link_libraries(move_bt_node utils)
-
-
-
 
 list(APPEND plugin_libs
   recharge_bt_node
@@ -84,7 +71,6 @@ list(APPEND plugin_libs
   back_bt_node
   turn_bt_node
   is_obstacle_bt_node
-
   get_components_bt_node
   assemble_bt_node
   target_bt_node
@@ -103,27 +89,23 @@ ament_target_dependencies(bt_patrol ${dependencies})
 
 add_executable(patrol src/patrol_main.cpp)
 ament_target_dependencies(patrol ${dependencies})
-target_link_libraries(patrol utils yaml-cpp /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+target_link_libraries(patrol utils yaml-cpp behaviorfleets::blackboard_manager)
 
 # add_executable(bf_patrol_wip src/bf_patrol_main_wip.cpp)
 # ament_target_dependencies(bf_patrol_wip ${dependencies})
-# target_link_libraries(bf_patrol_wip utils yaml-cpp /home/rod/ros2_ws/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+# target_link_libraries(bf_patrol_wip utils yaml-cpp behaviorfleets::blackboard_manager)
 
 add_executable(factory src/factory_main.cpp)
 ament_target_dependencies(factory ${dependencies})
-target_link_libraries(factory utils yaml-cpp /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libblackboard_manager.so)
+target_link_libraries(factory utils yaml-cpp behaviorfleets::blackboard_manager)
 
 add_executable(remote src/remote_main.cpp)
 ament_target_dependencies(remote ${dependencies})
-# SOLVE THIS!
-target_link_libraries(remote yaml-cpp /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
-# target_link_libraries(remote_tree yaml-cpp remote_delegate_action_node)
+target_link_libraries(remote yaml-cpp behaviorfleets::remote_delegate_action_node)
 
 add_executable(worker src/worker_robot.cpp)
 ament_target_dependencies(worker ${dependencies})
-target_link_libraries(worker /home/rod/robots/ros2/bf_ws/install/behaviorfleets/lib/libremote_delegate_action_node.so)
-
-
+target_link_libraries(worker yaml-cpp behaviorfleets::remote_delegate_action_node)
 
 install(TARGETS
   ${plugin_libs}
@@ -146,7 +128,6 @@ install(DIRECTORY bt_xml
 )
 
 install(DIRECTORY launch params config DESTINATION share/${PROJECT_NAME}/)
-
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
