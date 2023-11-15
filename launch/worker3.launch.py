@@ -26,6 +26,12 @@ def generate_launch_description():
     # Get the launch directory
     bf_patrol_dir = get_package_share_directory('bf_patrol')
 
+    params_file = os.path.join(bf_patrol_dir, 'params', 'hotspotsim.yaml')
+
+    with open(params_file, 'r') as f:
+        params = yaml.safe_load(f)['worker']['ros__parameters']
+    print(params)
+
     ld = LaunchDescription()
 
     args = ['R3', 'generic']
@@ -39,7 +45,10 @@ def generate_launch_description():
         remappings=[
             ('input_scan', '/scan'),
             ('output_vel', '/cmd_vel')
-        ]
+        ],
+        parameters=[{
+            'use_sim_time': True,
+        }, params],
     )
    
     ld.add_action(robot_cmd)
