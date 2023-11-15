@@ -39,13 +39,14 @@ def generate_launch_description():
         arguments=args,
         remappings=[
             ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel'),
-            ('/tf', '/robot1/tf'),
-        ]
+            ('output_vel', '/cmd_vel')
+        ],
+        parameters=[{
+            'use_sim_time': True
+        }],
     )
 
     ld.add_action(robot_cmd)
    
-
     return ld
 

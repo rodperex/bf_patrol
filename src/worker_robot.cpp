@@ -31,8 +31,7 @@ int main(int argc, char * argv[])
   std::cout << name << "/" << type << std::endl;
   auto node = std::make_shared<BF::RemoteDelegateActionNode>(name, type);
   std::cout << "\n\n******** Created robot " << name << " with mission " << type <<
-    " ********\n\n" <<
-    std::endl;
+    " ********\n\n" << std::endl;
 
   while (rclcpp::ok()) {
     rclcpp::spin_some(node);
