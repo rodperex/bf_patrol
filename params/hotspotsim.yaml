@@ -1,5 +1,5 @@
 worker:
   ros__parameters:
-    x_hotspot: 0.5 # hotstpot @ stacking point
-    y_hotspot: 2.3
+    x_hotspot: 0.0 # hotstpot @ stacking point
+    y_hotspot: -1.0
     range_hotspot: 1.0

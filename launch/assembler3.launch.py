@@ -48,7 +48,7 @@ def generate_launch_description():
         ],
         parameters=[{
             'use_sim_time': True,          
-        }, params],
+        }, params]
     )
 
     ld.add_action(robot_cmd)
