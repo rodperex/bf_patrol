@@ -48,14 +48,15 @@ int main(int argc, char * argv[])
 
   std::string pkgpath = ament_index_cpp::get_package_share_directory("bf_patrol");
 
-  std::string xml_file;
+  std::string xml_file, yaml_file;
   std::vector<Waypoint> wps;
   int freq;
 
 
   try {
     // Load the XML path from the YAML file
-    std::ifstream fin(pkgpath + "/params/patrol_factory.yaml");
+    yaml_file = argv[1];
+    std::ifstream fin(pkgpath + "/params/" + yaml_file);
     YAML::Node params = YAML::Load(fin);
     xml_file = pkgpath + params["source_tree"].as<std::string>();
     freq = params["manager_hz"].as<int>();

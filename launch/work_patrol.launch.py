@@ -25,6 +25,13 @@ import yaml
 def generate_launch_description():
     # Get the launch directory
     bf_patrol_dir = get_package_share_directory('bf_patrol')
+
+    # params = os.path.join(
+    #     get_package_share_directory('bf_patrol'),
+    #     'params',
+    #     'patrol_config.yaml'
+    # )
+
    
     # when simulating bad connection
     params_file = os.path.join(bf_patrol_dir, 'params', 'hotspotsim.yaml')
@@ -33,27 +40,44 @@ def generate_launch_description():
         params = yaml.safe_load(f)['worker']['ros__parameters']
     print(params)
 
+    config = os.path.join(bf_patrol_dir, 'config', 'patrol_params.yaml')
+
+    with open(config, "r") as stream:
+        try:
+            conf = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+
+    n_robots = conf['bf_patrol']['n_robots']
+    delay = conf['bf_patrol']['delay']
+
     ld = LaunchDescription()
 
-    args = ['R1', 'generic']
+    def create_robot_node(n):
+        robot_name = 'robot' + str(n + 1)
+        args = [('R' + str(n + 1)), 'generic']
+        robot_cmd = Node(
+            package='bf_patrol',
+            executable='worker',
+            namespace=robot_name,
+            output='screen',
+            parameters=[{
+                'use_sim_time': True,
+            }, params],
+            arguments=args,
+            remappings=[
+                ('input_scan', '/scan'),
+                ('output_vel', '/cmd_vel')
+            ]
+        )
+        return robot_cmd
 
+    for n in range(n_robots):
+        robot_cmd = create_robot_node(n)
+        ld.add_action(TimerAction(
+            actions=[robot_cmd],
+            period=delay * n
+        ))
 
-    robot_cmd = Node(
-        package='bf_patrol',
-        executable='worker',
-        namespace="robot1",
-        output='screen',
-        arguments=args,
-        remappings=[
-            ('input_scan', '/scan'),
-            ('output_vel', '/cmd_vel')
-        ],
-        parameters=[{
-            'use_sim_time': True,
-        }, params]
-    )
-
-    ld.add_action(robot_cmd)
-   
     return ld
 

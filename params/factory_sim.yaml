@@ -7,26 +7,26 @@ n_assembled: 0
 default_wp: collection_point
 waypoints:
   - id: storage_a
-    x: 1.8
-    y: -1.4
+    x: 1.5
+    y: -5.0
   - id: storage_b
-    x: 1.6
-    y: 0.5
+    x: 1.5
+    y: -7.0
   - id: stacking_point
-    x: 0.5
-    y: 2.3
+    x: 0.0
+    y: -1.0
   - id: assembly_point
-    x: -1.6
-    y: 0.01
+    x: 0.0
+    y: 0.0
   - id: collection_point
-    x: 1.0 # -2.5
-    y: 2.3 # -0.4
+    x: -0.5
+    y: -0.5
   - id: waiting_point_robot1
-    x: 5.2
-    y: 1.82
+    x: 5.0
+    y: 2.0
   - id: waiting_point_robot2
-    x: 0.8
-    y: 6.41
+    x: 1.0
+    y: -9.0
   - id: waiting_point_robot3
-    x: 0.6
-    y: -7.68
+    x: -4.0
+    y: -3.0

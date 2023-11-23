@@ -1,0 +1,56 @@
+source_tree: /bt_xml/source_3patrol.xml
+manager_hz: 1000
+waypoints:
+  - id: wp1
+    x: 4.3
+    y: 3.4
+    visited: false
+    in_process: false
+  - id: wp2
+    x: 1.12
+    y: 0.0
+    visited: false
+    in_process: false
+  - id: wp3
+    x: 1.12
+    y: 0.0
+    visited: false
+    in_process: false
+  - id: wp4
+    x: 1.12
+    y: 0.0
+    visited: false
+    in_process: false
+  - id: wp5
+    x: 1.12
+    y: 0.0
+    visited: false
+    in_process: false
+  - id: wp6
+    x: 1.12
+    y: 0.0
+    visited: false
+    in_process: false
+  - id: wp7
+    x: 1.12
+    y: 0.0
+    visited: false
+    in_process: false
+  - id: waiting_point_robot1
+    x: 1.12
+    y: 0.0
+    visited: true
+    in_process: false
+  - id: waiting_point_robot2
+    x: 1.12
+    y: 0.0
+    visited: true
+    in_process: false
+  - id: waiting_point_robot3
+    x: 1.12
+    y: 0.0
+    visited: true
+    in_process: false
+
+
+
