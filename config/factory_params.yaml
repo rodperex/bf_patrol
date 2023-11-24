@@ -14,6 +14,4 @@
 
 
 bf_patrol:
-  n_robots: 3
-  delay: 2.0
-  waypoints: patrol_real # yaml file with waypoints
+  config: factory_sim # yaml file with waypoints

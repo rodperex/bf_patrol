@@ -1,0 +1,32 @@
+source_tree: /bt_xml/source_factory.xml
+manager_hz: 100
+target: 3
+n_pieces_a: 0
+n_pieces_b: 0
+n_assembled: 0
+default_wp: collection_point
+waypoints:
+  - id: storage_a
+    x: 4.3
+    y: 3.4
+  - id: storage_b
+    x: 1.12
+    y: 0.0
+  - id: stacking_point
+    x: 1.8
+    y: 2.2
+  - id: assembly_point
+    x: 0.0
+    y: 0.0
+  - id: collection_point
+    x: -0.5
+    y: -0.5
+  - id: waiting_point_robot1
+    x: 5.0
+    y: 2.0
+  - id: waiting_point_robot2
+    x: 1.0
+    y: -9.0
+  - id: waiting_point_robot3
+    x: -4.0
+    y: -3.0
