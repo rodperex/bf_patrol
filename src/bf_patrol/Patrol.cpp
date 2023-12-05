@@ -38,6 +38,7 @@ Patrol::halt()
 BT::NodeStatus
 Patrol::tick()
 {
+  RCLCPP_DEBUG(rclcpp::get_logger("Patrol"), "Patrolling...");
   if (status() == BT::NodeStatus::IDLE) {
     start_time_ = node_->now();
   }

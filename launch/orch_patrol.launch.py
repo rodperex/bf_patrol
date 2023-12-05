@@ -43,7 +43,7 @@ def generate_launch_description():
         executable='patrol',
         output='screen',
         arguments=yaml_file,
-        parameters=[{'use_sim_time': True}]
+        parameters=[{'use_sim_time': False}]
     )
 
     ld.add_action(robot_cmd)

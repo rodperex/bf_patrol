@@ -62,7 +62,7 @@ def generate_launch_description():
             namespace=robot_name,
             output='screen',
             parameters=[{
-                'use_sim_time': True,
+                'use_sim_time': False,
             }, params],
             arguments=args,
             remappings=[

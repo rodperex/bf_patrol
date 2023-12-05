@@ -2,53 +2,53 @@ source_tree: /bt_xml/source_3patrol.xml
 manager_hz: 1000
 waypoints:
   - id: wp1
-    x: 4.3
-    y: 3.4
+    x: 5.12
+    y: 6.51
     visited: false
     in_process: false
   - id: wp2
-    x: 1.12
-    y: 0.0
+    x: 3.48
+    y: 2.71
     visited: false
     in_process: false
   - id: wp3
-    x: 1.12
-    y: 0.0
+    x: -1.22
+    y: 4.2
     visited: false
     in_process: false
   - id: wp4
-    x: 1.12
-    y: 0.0
+    x: 6.18
+    y: 3.22
     visited: false
     in_process: false
   - id: wp5
-    x: 1.12
-    y: 0.0
+    x: 1.37
+    y: -0.38
     visited: false
     in_process: false
   - id: wp6
-    x: 1.12
-    y: 0.0
+    x: 0.5
+    y: 4.61
     visited: false
     in_process: false
   - id: wp7
-    x: 1.12
-    y: 0.0
+    x: 2.86
+    y: 6.6
     visited: false
     in_process: false
   - id: waiting_point_robot1
-    x: 1.12
-    y: 0.0
+    x: 0.6785991084881526
+    y: 4.692139667131213
     visited: true
     in_process: false
   - id: waiting_point_robot2
-    x: 1.12
-    y: 0.0
+    x: 1.240160799627891
+    y: 2.145955134664589
     visited: true
     in_process: false
   - id: waiting_point_robot3
-    x: 1.12
-    y: 0.0
+    x: 4.601333738692481
+    y: 2.8585780048787335
     visited: true
     in_process: false
 

@@ -49,7 +49,7 @@ def generate_launch_description():
             ('output_vel', '/cmd_vel')
         ],
         parameters=[{
-            'use_sim_time': True,
+            'use_sim_time': False,
         }, params]
     )
 
