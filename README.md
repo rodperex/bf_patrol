@@ -10,10 +10,10 @@ Everything here is based on a example of the book **A Concise Introduction to Ro
 
 * Visiting a set of waypoints
 * Manufacturing
-* Mixed (TBD): in this example, the robots that are not manufacturing products are configured to execute generic tasks so when they can swap roles according to the work to be done
+
 
 # How to run the simulations
-To make it work it is **essential** that following commands are executed **in order**. If the main program is not run before the robots are launched, the shared blackboard will not be configured thus group patrolling will fail.
+To make it work it is **essential** that following commands are executed **in order**. If the main program is not run before the robots are launched, the shared blackboard will not be configured thus collaboration will fail.
 
 To run the basic patrolling example:
 
@@ -33,5 +33,8 @@ ros2 launch bf_patrol worker_2.launch.py
 ros2 launch bf_patrol assembler_3.launch.py
 ```
 
+Please make sure parameter `use_sim_time` is set to `True` for the simulations.
 
+# Clarifications
+All examples here have a non-robot orchestrator that publishes the tasks to be done, which does not imply a robot can delegate a task that it cannot perform, such as opening a door, or doing some highly specialized operation.
 
